@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - MediCare Pharmacy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #1976d2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 50px auto;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .profile-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-title h1 {
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .profile-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1976d2;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin: 0 auto 15px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1976d2;
+        }
+
+        .email-note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        .update-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #1976d2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .update-btn:hover {
+            background: #1565c0;
+        }
+
+        .address-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #43a047;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #e53935;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        footer {
+            margin-top: 50px;
+            background: #1976d2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .profile-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        MediCare Pharmacy
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="profile-card">
+
+        <div class="profile-title">
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+            <h1>My Profile</h1>
+
+            <p>Manage your account details</p>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="userName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="userName"
+                placeholder="Enter your name"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                readonly
+            >
+
+            <p class="email-note">
+                Email cannot be changed.
+            </p>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                id="phone"
+                placeholder="Enter your phone number"
+            >
+
+        </div>
+
+
+        <button
+            class="update-btn"
+            onclick="updateProfile()">
+            Update Profile
+        </button>
+
+
+        <button
+            class="address-btn"
+            onclick="manageAddress()">
+            Manage Addresses
+        </button>
+
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+            Logout
+        </button>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 MediCare Pharmacy. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    const API_URL = "http://localhost:3000"
+
+    const userId = localStorage.getItem("user_id")
+
+
+    if (!userId) {
+
+        window.location.href = "login.html"
+
+    }
+    else {
+
+        loadProfile()
+
+    }
+
+
+    async function loadProfile() {
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/user/profile/${userId}`
+            )
+
+            const result = await response.json()
+
+
+            if (result.status === "success" && result.data) {
+
+                document.getElementById("userName").value =
+                    result.data.user_name || ""
+
+
+                document.getElementById("email").value =
+                    result.data.email || ""
+
+
+                document.getElementById("phone").value =
+                    result.data.phone || ""
+
+            }
+
+        }
+        catch (error) {
+
+            console.log(error)
+
+            showMessage(
+                "Failed to load profile",
+                "red"
+            )
+
+        }
+
+    }
+
+
+    async function updateProfile() {
+
+        const userName =
+            document.getElementById("userName").value.trim()
+
+
+        const phone =
+            document.getElementById("phone").value.trim()
+
+
+        if (userName === "") {
+
+            showMessage(
+                "Please enter your name",
+                "red"
+            )
+
+            return
+
+        }
+
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/user/profile/${userId}`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        user_name: userName,
+                        phone: phone
+                    })
+                }
+            )
+
+
+            const result = await response.json()
+
+
+            if (result.status === "success") {
+
+                localStorage.setItem(
+                    "user_name",
+                    userName
+                )
+
+                showMessage(
+                    "Profile updated successfully",
+                    "green"
+                )
+
+            }
+            else {
+
+                showMessage(
+                    result.message || "Update failed",
+                    "red"
+                )
+
+            }
+
+        }
+        catch (error) {
+
+            console.log(error)
+
+            showMessage(
+                "Profile update failed",
+                "red"
+            )
+
+        }
+
+    }
+
+
+    function manageAddress() {
+
+        window.location.href = "checkout.html"
+
+    }
+
+
+    function logout() {
+
+        const confirmLogout =
+            confirm("Are you sure you want to logout?")
+
+
+        if (!confirmLogout) {
+
+            return
+
+        }
+
+
+        localStorage.removeItem("user_id")
+        localStorage.removeItem("user_name")
+        localStorage.removeItem("user_email")
+        localStorage.removeItem("selectedProductId")
+        localStorage.removeItem("selectedOrderId")
+        localStorage.removeItem("cart_total")
+
+
+        window.location.href = "login.html"
+
+    }
+
+
+    function showMessage(message, color) {
+
+        const messageBox =
+            document.getElementById("message")
+
+        messageBox.innerText = message
+        messageBox.style.color = color
+
+    }
+
+</script>
+
+</body>
+</html>

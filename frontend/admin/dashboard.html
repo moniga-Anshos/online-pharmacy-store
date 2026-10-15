@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard - MediCare Pharmacy</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #333;
+        }
+
+
+        /* HEADER */
+
+        header {
+            background: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            color: #1976d2;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .admin-name {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .admin-name span {
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+
+        /* CONTAINER */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #777;
+        }
+
+
+        /* STAT CARDS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h3 {
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .stat-card h2 {
+            color: #1976d2;
+            font-size: 28px;
+        }
+
+
+        /* MENU */
+
+        .section-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .menu-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .menu-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .menu-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 60px;
+            background: #1976d2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .admin-name {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        MediCare Pharmacy
+    </div>
+
+
+    <div class="admin-name">
+
+        <span id="adminName">
+            Admin
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h1>
+            Admin Dashboard
+        </h1>
+
+        <p>
+            Manage your online pharmacy store
+        </p>
+
+    </div>
+
+
+
+    <!-- STATISTICS -->
+
+    <div class="stats">
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Products
+            </h3>
+
+            <h2 id="productCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Customers
+            </h3>
+
+            <h2 id="customerCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Total Orders
+            </h3>
+
+            <h2 id="orderCount">
+                0
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h3>
+                Pending Orders
+            </h3>
+
+            <h2 id="pendingCount">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MANAGEMENT -->
+
+    <h2 class="section-title">
+        Store Management
+    </h2>
+
+
+    <div class="menu-grid">
+
+
+        <div
+            class="menu-card"
+            onclick="openPage('products.html')">
+
+            <div class="menu-icon">
+                📦
+            </div>
+
+            <h3>
+                Products
+            </h3>
+
+            <p>
+                Add, edit and delete pharmacy products.
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="menu-card"
+            onclick="openPage('categories.html')">
+
+            <div class="menu-icon">
+                🗂️
+            </div>
+
+            <h3>
+                Categories
+            </h3>
+
+            <p>
+                Manage product categories.
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="menu-card"
+            onclick="openPage('stock.html')">
+
+            <div class="menu-icon">
+                📊
+            </div>
+
+            <h3>
+                Stock Management
+            </h3>
+
+            <p>
+                Check and update product stock.
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="menu-card"
+            onclick="openPage('orders.html')">
+
+            <div class="menu-icon">
+                🛒
+            </div>
+
+            <h3>
+                Orders
+            </h3>
+
+            <p>
+                View and manage customer orders.
+            </p>
+
+        </div>
+
+
+
+        <div
+            class="menu-card"
+            onclick="openPage('customers.html')">
+
+            <div class="menu-icon">
+                👥
+            </div>
+
+            <h3>
+                Customers
+            </h3>
+
+            <p>
+                View registered customer details.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    <p>
+        © 2026 MediCare Pharmacy. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<script>
+
+    const API_URL = "http://localhost:3000"
+
+
+    const adminId =
+        localStorage.getItem("admin_id")
+
+
+    const adminName =
+        localStorage.getItem("admin_name")
+
+
+
+    /* CHECK ADMIN LOGIN */
+
+    if (!adminId) {
+
+        window.location.href =
+            "admin-login.html"
+
+    }
+
+
+
+    /* DISPLAY ADMIN NAME */
+
+    if (adminName) {
+
+        document.getElementById("adminName").innerText =
+            adminName
+
+    }
+
+
+
+    async function loadDashboardData() {
+        try {
+            const [productResponse, customerResponse, orderResponse] = await Promise.all([
+                fetch(`${API_URL}/product`),
+                fetch(`${API_URL}/admin/customers`),
+                fetch(`${API_URL}/admin/orders`)
+            ]);
+            const [productResult, customerResult, orderResult] = await Promise.all([
+                productResponse.json(), customerResponse.json(), orderResponse.json()
+            ]);
+            if (productResponse.ok && productResult.status === "success") {
+                document.getElementById("productCount").innerText = (productResult.data || []).length;
+            }
+            if (customerResponse.ok && customerResult.status === "success") {
+                document.getElementById("customerCount").innerText = (customerResult.data || []).length;
+            }
+            if (orderResponse.ok && orderResult.status === "success") {
+                const orders = orderResult.data || [];
+                document.getElementById("orderCount").innerText = orders.length;
+                document.getElementById("pendingCount").innerText = orders.filter(order =>
+                    (order.order_status || "pending").toLowerCase() === "pending"
+                ).length;
+            }
+        } catch (error) {
+            console.error("Dashboard data loading failed:", error);
+        }
+    }
+
+
+    function openPage(page) {
+
+        window.location.href = page
+
+    }
+
+
+
+    function logout() {
+
+        const confirmLogout =
+            confirm(
+                "Are you sure you want to logout?"
+            )
+
+
+        if (!confirmLogout) {
+
+            return
+
+        }
+
+
+        localStorage.removeItem(
+            "admin_id"
+        )
+
+        localStorage.removeItem(
+            "admin_name"
+        )
+
+        localStorage.removeItem(
+            "admin_email"
+        )
+
+
+        window.location.href =
+            "admin-login.html"
+
+    }
+
+
+
+    loadDashboardData()
+
+</script>
+
+
+</body>
+
+</html>

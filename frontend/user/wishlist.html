@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wishlist - MediCare Pharmacy</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f6faf8;
+            color: #222;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+
+        header {
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #168a63;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #168a63;
+        }
+
+        /* PAGE */
+
+        .page-title {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .page-title h1 {
+            color: #168a63;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+        /* WISHLIST */
+
+        .wishlist-section {
+            padding: 20px 7% 70px;
+        }
+
+        .wishlist-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .wishlist-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .wishlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            height: 210px;
+            background: #eef8f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .no-image {
+            font-size: 70px;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: #d63031;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            z-index: 2;
+        }
+
+        .remove-btn:hover {
+            background: #fff1f1;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .category {
+            color: #168a63;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .product-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .product-info h3:hover {
+            color: #168a63;
+        }
+
+        .price {
+            color: #168a63;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #999;
+            font-size: 13px;
+            text-decoration: line-through;
+            margin-left: 6px;
+            font-weight: normal;
+        }
+
+        .discount {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 5px 8px;
+            background: #fff1df;
+            color: #e87900;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .cart-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 11px;
+            border: none;
+            border-radius: 6px;
+            background: #168a63;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background: #116d4f;
+        }
+
+        /* EMPTY */
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 80px 20px;
+            display: none;
+        }
+
+        .empty-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .empty-wishlist h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty-wishlist p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #168a63;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* LOADING */
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #777;
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px;
+            color: #d63031;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #12352b;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+
+            .wishlist-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .wishlist-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .wishlist-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            MediCare Pharmacy
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="wishlist.html">
+                ❤️ Wishlist
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- TITLE -->
+
+    <section class="page-title">
+
+        <h1>
+            My Wishlist ❤️
+        </h1>
+
+        <p>
+            Products you saved for later
+        </p>
+
+    </section>
+
+
+    <!-- LOADING -->
+
+    <div
+        id="loading"
+        class="loading"
+    >
+        Loading wishlist...
+    </div>
+
+
+    <!-- WISHLIST -->
+
+    <section class="wishlist-section">
+
+        <div
+            id="wishlistContainer"
+            class="wishlist-container"
+        ></div>
+
+
+        <!-- EMPTY -->
+
+        <div
+            id="emptyWishlist"
+            class="empty-wishlist"
+        >
+
+            <div class="empty-icon">
+                💔
+            </div>
+
+            <h2>
+                Your Wishlist is Empty
+            </h2>
+
+            <p>
+                Save products you like and find them here later.
+            </p>
+
+            <a
+                href="products.html"
+                class="shop-btn"
+            >
+                Browse Products
+            </a>
+
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="error"
+            class="error"
+            style="display: none;"
+        ></div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 MediCare Pharmacy. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        const API_URL = "http://localhost:3000"
+
+
+        const userId =
+            localStorage.getItem("user_id")
+
+
+        /* CHECK LOGIN */
+
+        if (!userId) {
+
+            alert(
+                "Please login to view your wishlist."
+            )
+
+            window.location.href =
+                "login.html"
+
+        }
+
+
+        /* LOAD WISHLIST */
+
+        async function loadWishlist() {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/wishlist/${userId}`
+                    )
+
+
+                const result =
+                    await response.json()
+
+
+                document.getElementById(
+                    "loading"
+                ).style.display = "none"
+
+
+                if (
+                    result.status !== "success"
+                ) {
+
+                    throw new Error(
+                        "Failed to load wishlist"
+                    )
+
+                }
+
+
+                const wishlist =
+                    result.data || []
+
+
+                if (wishlist.length === 0) {
+
+                    document.getElementById(
+                        "emptyWishlist"
+                    ).style.display = "block"
+
+                    return
+
+                }
+
+
+                displayWishlist(wishlist)
+
+            } catch (error) {
+
+                console.log(error)
+
+                document.getElementById(
+                    "loading"
+                ).style.display = "none"
+
+
+                document.getElementById(
+                    "error"
+                ).style.display = "block"
+
+
+                document.getElementById(
+                    "error"
+                ).textContent =
+                    "Unable to load wishlist."
+
+            }
+
+        }
+
+
+        /* DISPLAY WISHLIST */
+
+        function displayWishlist(wishlist) {
+
+            const container =
+                document.getElementById(
+                    "wishlistContainer"
+                )
+
+
+            container.innerHTML = ""
+
+
+            wishlist.forEach(product => {
+
+                const price =
+                    Number(product.price)
+
+
+                const discount =
+                    Number(product.discount || 0)
+
+
+                const finalPrice =
+                    price -
+                    (price * discount / 100)
+
+
+                /*
+                    IMAGE URL FIX
+
+                    Database:
+                    /uploads/image.jpg
+
+                    Backend:
+                    http://localhost:3000/uploads/image.jpg
+                */
+
+                let imageHTML = ""
+
+
+                if (product.image_url) {
+
+                    let imageUrl =
+                        product.image_url
+
+
+                    if (
+                        imageUrl.startsWith("/")
+                    ) {
+
+                        imageUrl =
+                            API_URL + imageUrl
+
+                    }
+
+
+                    imageHTML = `
+
+                        <img
+                            src="${imageUrl}"
+                            alt="${product.product_name}"
+                            onerror="showImageError(this)"
+                        >
+
+                    `
+
+                } else {
+
+                    imageHTML = `
+
+                        <div class="no-image">
+                            💊
+                        </div>
+
+                    `
+
+                }
+
+
+                const oldPriceHTML =
+                    discount > 0
+                        ? `
+                            <span class="old-price">
+                                ₹${price.toFixed(2)}
+                            </span>
+                          `
+                        : ""
+
+
+                const discountHTML =
+                    discount > 0
+                        ? `
+                            <div class="discount">
+                                ${discount}% OFF
+                            </div>
+                          `
+                        : ""
+
+
+                container.innerHTML += `
+
+                    <div class="wishlist-card">
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeWishlist(
+                                ${product.product_id}
+                            )"
+                            title="Remove"
+                        >
+                            ×
+                        </button>
+
+
+                        <div
+                            class="product-image"
+                            onclick="viewProduct(
+                                ${product.product_id}
+                            )"
+                        >
+
+                            ${imageHTML}
+
+                        </div>
+
+
+                        <div class="product-info">
+
+                            <div class="category">
+                                ${product.category_name || "General"}
+                            </div>
+
+
+                            <h3
+                                onclick="viewProduct(
+                                    ${product.product_id}
+                                )"
+                            >
+                                ${product.product_name}
+                            </h3>
+
+
+                            <div class="price">
+
+                                ₹${finalPrice.toFixed(2)}
+
+                                ${oldPriceHTML}
+
+                            </div>
+
+
+                            ${discountHTML}
+
+
+                            <button
+                                class="cart-btn"
+                                onclick="addToCart(
+                                    ${product.product_id}
+                                )"
+                            >
+                                🛒 Add to Cart
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `
+
+            })
+
+        }
+
+
+        /* IMAGE ERROR */
+
+        function showImageError(image) {
+
+            image.style.display = "none"
+
+            image.parentElement.innerHTML = `
+                <div class="no-image">
+                    💊
+                </div>
+            `
+
+        }
+
+
+        /* REMOVE WISHLIST */
+
+        async function removeWishlist(productId) {
+
+            const confirmRemove =
+                confirm(
+                    "Remove this product from wishlist?"
+                )
+
+
+            if (!confirmRemove) {
+                return
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/wishlist/remove`,
+                        {
+                            method: "DELETE",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                user_id:
+                                    Number(userId),
+
+                                product_id:
+                                    productId
+
+                            })
+
+                        }
+                    )
+
+
+                const result =
+                    await response.json()
+
+
+                if (
+                    result.status === "success"
+                ) {
+
+                    alert(
+                        "Product removed from wishlist"
+                    )
+
+                    loadWishlist()
+
+                } else {
+
+                    alert(
+                        result.message ||
+                        "Failed to remove product"
+                    )
+
+                }
+
+            } catch (error) {
+
+                console.log(error)
+
+                alert(
+                    "Something went wrong."
+                )
+
+            }
+
+        }
+
+
+        /* ADD TO CART */
+
+        async function addToCart(productId) {
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/cart/wishlist-to-cart`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                user_id:
+                                    Number(userId),
+
+                                product_id:
+                                    productId
+
+                            })
+
+                        }
+                    )
+
+
+                const result =
+                    await response.json()
+
+
+                if (
+                    result.status === "success"
+                ) {
+
+                    alert(
+                        "Product added to cart 🛒"
+                    )
+
+                } else {
+
+                    alert(
+                        result.message ||
+                        "Failed to add product"
+                    )
+
+                }
+
+            } catch (error) {
+
+                console.log(error)
+
+                alert(
+                    "Something went wrong."
+                )
+
+            }
+
+        }
+
+
+        /* VIEW PRODUCT */
+
+        function viewProduct(productId) {
+
+            localStorage.setItem(
+                "selectedProductId",
+                productId
+            )
+
+            window.location.href =
+                "product-details.html"
+
+        }
+
+
+        /* START */
+
+        loadWishlist()
+
+    </script>
+
+
+</body>
+
+</html>
+

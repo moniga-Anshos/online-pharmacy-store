@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Online Pharmacy Store</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7faf9;
+            color: #222;
+        }
+
+        /* HEADER */
+
+        header {
+            width: 100%;
+            background: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #168a63;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #168a63;
+        }
+
+        .login-btn {
+            background: #168a63;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 6px;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            padding: 60px 7%;
+            background: linear-gradient(
+                120deg,
+                #e9f8f1,
+                #f8fffc
+            );
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #168a63;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #168a63;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .shop-btn:hover {
+            background: #116d4f;
+        }
+
+        /* FEATURES */
+
+        .features {
+            padding: 50px 7%;
+            background: white;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* CATEGORIES */
+
+        .categories {
+            padding: 60px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e8e8e8;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .category-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            margin-bottom: 8px;
+            color: #168a63;
+        }
+
+        .category-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 30px 7% 60px;
+            padding: 50px;
+            border-radius: 12px;
+            background: #168a63;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #168a63;
+            padding: 13px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #12352b;
+            color: white;
+            padding: 35px 7%;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #c9d8d3;
+            font-size: 14px;
+            line-height: 2;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #31554b;
+            color: #c9d8d3;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .category-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                min-height: 450px;
+                padding: 40px 6%;
+            }
+
+            .hero-content h1 {
+                font-size: 34px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .category-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta {
+                margin: 20px 6% 40px;
+                padding: 35px 20px;
+            }
+
+            .cta h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            MediCare Pharmacy
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="products.html">
+                Products
+            </a>
+
+            <a href="wishlist.html">
+                ❤️ Wishlist
+            </a>
+
+            <a href="cart.html">
+                🛒 Cart
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="login.html" class="login-btn">
+                Login
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Your Health,
+                <span>Our Priority</span>
+            </h1>
+
+            <p>
+                Shop healthcare, wellness and personal care
+                products from the comfort of your home.
+            </p>
+
+            <a href="products.html" class="shop-btn">
+                Shop Now
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🚚
+                </div>
+
+                <h3>
+                    Fast Delivery
+                </h3>
+
+                <p>
+                    Get your products delivered safely
+                    to your doorstep.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    Secure Shopping
+                </h3>
+
+                <p>
+                    Your account and shopping information
+                    are handled securely.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💊
+                </div>
+
+                <h3>
+                    Quality Products
+                </h3>
+
+                <p>
+                    Browse our healthcare and wellness
+                    product collection.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIES -->
+
+    <section class="categories">
+
+        <div class="section-title">
+
+            <h2>
+                Shop by Category
+            </h2>
+
+            <p>
+                Find products easily from different categories
+            </p>
+
+        </div>
+
+
+        <div class="category-container">
+
+
+            <div class="category-card"
+                 onclick="openCategory('Vitamins')">
+
+                <div class="category-icon">
+                    💊
+                </div>
+
+                <h3>
+                    Vitamins
+                </h3>
+
+                <p>
+                    Vitamins and wellness products
+                </p>
+
+            </div>
+
+
+            <div class="category-card"
+                 onclick="openCategory('Personal Care')">
+
+                <div class="category-icon">
+                    🧴
+                </div>
+
+                <h3>
+                    Personal Care
+                </h3>
+
+                <p>
+                    Personal care essentials
+                </p>
+
+            </div>
+
+
+            <div class="category-card"
+                 onclick="openCategory('Health Care')">
+
+                <div class="category-icon">
+                    🩺
+                </div>
+
+                <h3>
+                    Health Care
+                </h3>
+
+                <p>
+                    Healthcare essentials
+                </p>
+
+            </div>
+
+
+            <div class="category-card"
+                 onclick="openCategory('Baby Care')">
+
+                <div class="category-icon">
+                    👶
+                </div>
+
+                <h3>
+                    Baby Care
+                </h3>
+
+                <p>
+                    Baby care essentials
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- CALL TO ACTION -->
+
+    <section class="cta">
+
+        <h2>
+            Take Care of Your Health
+        </h2>
+
+        <p>
+            Explore our products and find what you need today.
+        </p>
+
+        <a href="products.html" class="cta-btn">
+            Explore Products
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-container">
+
+
+            <div class="footer-column">
+
+                <h3>
+                    MediCare Pharmacy
+                </h3>
+
+                <p>
+                    Your trusted online destination for
+                    healthcare and wellness products.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <p>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </p>
+
+                <p>
+                    <a href="products.html">
+                        Products
+                    </a>
+                </p>
+
+                <p>
+                    <a href="wishlist.html">
+                        Wishlist
+                    </a>
+                </p>
+
+                <p>
+                    <a href="cart.html">
+                        Cart
+                    </a>
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>
+                    Account
+                </h3>
+
+                <p>
+                    <a href="login.html">
+                        Login
+                    </a>
+                </p>
+
+                <p>
+                    <a href="register.html">
+                        Register
+                    </a>
+                </p>
+
+                <p>
+                    <a href="profile.html">
+                        My Profile
+                    </a>
+                </p>
+
+                <p>
+                    <a href="orders.html">
+                        My Orders
+                    </a>
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 MediCare Pharmacy. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function openCategory(category) {
+
+            localStorage.setItem(
+                "selectedCategory",
+                category
+            )
+
+            window.location.href =
+                "products.html"
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

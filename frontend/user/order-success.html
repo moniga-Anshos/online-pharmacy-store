@@ -1,0 +1,423 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Success</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            background: #f5f7f6;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        .success-box {
+            width: 100%;
+            max-width: 500px;
+
+            background: white;
+
+            padding: 40px 30px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .success-icon {
+
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #168a63;
+
+            color: white;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 40px;
+
+            font-weight: bold;
+        }
+
+
+        h1 {
+
+            color: #168a63;
+
+            font-size: 28px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .success-message {
+
+            color: #666;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        .order-details {
+
+            background: #f8fbfa;
+
+            border: 1px solid #e2eee9;
+
+            border-radius: 8px;
+
+            padding: 18px;
+
+            text-align: left;
+
+            margin-bottom: 20px;
+        }
+
+
+        .detail-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 10px 0;
+
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+
+        .detail-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .detail-label {
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        .detail-value {
+
+            color: #222;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            text-align: right;
+        }
+
+
+        .delivery-section {
+
+            background: #f0faf6;
+
+            border-radius: 8px;
+
+            padding: 20px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .delivery-title {
+
+            color: #666;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .delivery-date {
+
+            color: #168a63;
+
+            font-size: 21px;
+
+            font-weight: bold;
+        }
+
+
+        .orders-btn {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #168a63;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .orders-btn:hover {
+
+            background: #117450;
+        }
+
+
+        @media(max-width: 500px) {
+
+            .success-box {
+
+                padding: 30px 20px;
+            }
+
+
+            h1 {
+
+                font-size: 24px;
+            }
+
+
+            .detail-row {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 5px;
+            }
+
+
+            .detail-value {
+
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="success-box">
+
+
+        <!-- SUCCESS ICON -->
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <!-- SUCCESS MESSAGE -->
+
+        <h1>
+            Order Successfully Placed!
+        </h1>
+
+
+        <p class="success-message">
+
+            Thank you for your order.
+
+            Your order has been placed successfully.
+
+        </p>
+
+
+        <!-- ORDER DETAILS -->
+
+        <div class="order-details">
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Order ID
+                </span>
+
+                <span
+                    class="detail-value"
+                    id="orderId"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <span class="detail-label">
+                    Order Status
+                </span>
+
+                <span class="detail-value">
+                    Confirmed
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- DELIVERY DATE -->
+
+        <div class="delivery-section">
+
+
+            <div class="delivery-title">
+                Expected Delivery
+            </div>
+
+
+            <div
+                class="delivery-date"
+                id="deliveryDate"
+            >
+                Loading...
+            </div>
+
+
+        </div>
+
+
+        <!-- VIEW ORDERS -->
+
+        <button
+            class="orders-btn"
+            onclick="viewOrders()"
+        >
+            View My Orders
+        </button>
+
+
+    </div>
+
+
+    <script>
+
+
+        /* =========================
+           GET ORDER ID
+        ========================= */
+
+        const orderId =
+            localStorage.getItem("order_id")
+
+
+        document.getElementById(
+            "orderId"
+        ).textContent =
+            orderId || "-"
+
+
+        /* =========================
+           DELIVERY DATE
+           5 DAYS FROM TODAY
+        ========================= */
+
+        const deliveryDate =
+            new Date()
+
+
+        deliveryDate.setDate(
+            deliveryDate.getDate() + 5
+        )
+
+
+        const formattedDate =
+            deliveryDate.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric"
+                }
+            )
+
+
+        document.getElementById(
+            "deliveryDate"
+        ).textContent =
+            formattedDate
+
+
+        /* =========================
+           VIEW ORDERS
+        ========================= */
+
+        function viewOrders() {
+
+            window.location.href =
+                "orders.html"
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
+
+

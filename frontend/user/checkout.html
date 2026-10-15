@@ -1,0 +1,918 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7f6;
+            color: #222;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .checkout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #168a63;
+        }
+
+        .save-address {
+            width: 100%;
+            padding: 11px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #168a63;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .save-address:hover {
+            background: #117450;
+        }
+
+        /* PAYMENT */
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .payment-option:hover {
+            border-color: #168a63;
+        }
+
+        .payment-option input {
+            width: 18px;
+            height: 18px;
+            accent-color: #168a63;
+        }
+
+        .payment-option.selected {
+            border: 2px solid #168a63;
+            background: #f0faf6;
+        }
+
+        .payment-name {
+            font-weight: bold;
+        }
+
+        .payment-description {
+            font-size: 13px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        /* SUMMARY */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .summary-row.discount {
+            color: #168a63;
+        }
+
+        .final-row {
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 768px) {
+
+            .checkout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+    <h1>Checkout</h1>
+
+
+    <div class="checkout">
+
+
+        <!-- LEFT SIDE -->
+
+        <div>
+
+
+            <!-- DELIVERY ADDRESS -->
+
+            <div class="box">
+
+                <h2>Delivery Address</h2>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        maxlength="15"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Full Address
+                    </label>
+
+                    <textarea
+                        id="address"
+                        placeholder="Enter your complete delivery address"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="City"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        State
+                    </label>
+
+                    <input
+                        type="text"
+                        id="state"
+                        placeholder="State"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Pincode
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pincode"
+                        placeholder="Pincode"
+                        maxlength="10"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <div class="box">
+
+                <h2>Payment Method</h2>
+
+
+                <div class="payment-options">
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="upi"
+                        >
+
+                        <div>
+
+                            <div class="payment-name">
+                                📱 UPI
+                            </div>
+
+                            <div class="payment-description">
+                                Pay using UPI apps
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="card"
+                        >
+
+                        <div>
+
+                            <div class="payment-name">
+                                💳 Card
+                            </div>
+
+                            <div class="payment-description">
+                                Pay using Debit / Credit Card
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="net banking"
+                        >
+
+                        <div>
+
+                            <div class="payment-name">
+                                🏦 Net Banking
+                            </div>
+
+                            <div class="payment-description">
+                                Pay using Internet Banking
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="cash on delivery"
+                        >
+
+                        <div>
+
+                            <div class="payment-name">
+                                💵 Cash on Delivery
+                            </div>
+
+                            <div class="payment-description">
+                                Pay when your order is delivered
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- SAVE ADDRESS -->
+
+                <button
+                    class="save-address"
+                    id="saveAddressBtn"
+                    onclick="saveAddress()"
+                >
+                    Save Address
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div>
+
+            <div class="box">
+
+                <h2>Order Summary</h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ₹<span id="subtotal">0</span>
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row discount">
+
+                    <span>
+                        Product Discount
+                    </span>
+
+                    <span>
+                        - ₹<span id="productDiscount">0</span>
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row final-row">
+
+                    <span>
+                        Final Amount
+                    </span>
+
+                    <span>
+                        ₹<span id="finalAmount">0</span>
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+const API_URL =
+    "http://localhost:3000"
+
+
+const userId =
+    localStorage.getItem("user_id")
+
+
+let selectedAddressId = null
+
+let cart = []
+
+let subtotal = 0
+
+let productDiscount = 0
+
+
+/* =========================
+   PAYMENT SELECTION
+========================= */
+
+const paymentOptions =
+    document.querySelectorAll(
+        'input[name="payment"]'
+    )
+
+
+paymentOptions.forEach(option => {
+
+    option.addEventListener(
+        "change",
+        function () {
+
+            document
+                .querySelectorAll(
+                    ".payment-option"
+                )
+                .forEach(item => {
+
+                    item.classList.remove(
+                        "selected"
+                    )
+
+                })
+
+
+            this
+                .closest(
+                    ".payment-option"
+                )
+                .classList.add(
+                    "selected"
+                )
+
+        }
+    )
+
+})
+
+
+/* =========================
+   LOAD CART
+========================= */
+
+async function loadCart() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/cart/${userId}`
+            )
+
+
+        const result =
+            await response.json()
+
+
+        cart =
+            result.data || []
+
+
+        calculateTotal()
+
+    } catch (error) {
+
+        console.log(error)
+
+    }
+
+}
+
+
+/* =========================
+   CALCULATE TOTAL
+========================= */
+
+function calculateTotal() {
+
+    subtotal = 0
+
+    productDiscount = 0
+
+
+    cart.forEach(item => {
+
+        const price =
+            Number(item.price)
+
+        const quantity =
+            Number(item.quantity)
+
+        const discount =
+            Number(item.discount || 0)
+
+
+        subtotal +=
+            price * quantity
+
+
+        productDiscount +=
+            (
+                price *
+                quantity *
+                discount
+            ) / 100
+
+    })
+
+
+    updateSummary()
+
+}
+
+
+/* =========================
+   UPDATE SUMMARY
+========================= */
+
+function updateSummary() {
+
+    const finalAmount =
+        subtotal -
+        productDiscount
+
+
+    document.getElementById(
+        "subtotal"
+    ).textContent =
+        subtotal.toFixed(2)
+
+
+    document.getElementById(
+        "productDiscount"
+    ).textContent =
+        productDiscount.toFixed(2)
+
+
+    document.getElementById(
+        "finalAmount"
+    ).textContent =
+        finalAmount.toFixed(2)
+
+}
+
+
+/* =========================
+   SAVE ADDRESS + PLACE ORDER
+========================= */
+
+async function saveAddress() {
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim()
+
+
+    const address =
+        document.getElementById(
+            "address"
+        ).value.trim()
+
+
+    const city =
+        document.getElementById(
+            "city"
+        ).value.trim()
+
+
+    const state =
+        document.getElementById(
+            "state"
+        ).value.trim()
+
+
+    const pincode =
+        document.getElementById(
+            "pincode"
+        ).value.trim()
+
+
+    /* =========================
+       CHECK ADDRESS
+    ========================= */
+
+    if (
+        !phone ||
+        !address ||
+        !city ||
+        !state ||
+        !pincode
+    ) {
+
+        alert(
+            "Please fill all address details"
+        )
+
+        return
+
+    }
+
+
+    /* =========================
+       CHECK PAYMENT
+    ========================= */
+
+    const selectedPayment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        )
+
+
+    if (!selectedPayment) {
+
+        alert(
+            "Please select a payment method"
+        )
+
+        return
+
+    }
+
+
+    const paymentMethod =
+        selectedPayment.value
+
+
+    const saveButton =
+        document.getElementById(
+            "saveAddressBtn"
+        )
+
+
+    saveButton.disabled = true
+
+    saveButton.textContent =
+        "Processing..."
+
+
+    try {
+
+
+        /* =========================
+           SAVE ADDRESS
+        ========================= */
+
+        const addressResponse =
+            await fetch(
+                `${API_URL}/order/address`,
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        user_id:
+                            userId,
+
+                        phone:
+                            phone,
+
+                        address:
+                            address,
+
+                        city:
+                            city,
+
+                        state:
+                            state,
+
+                        pincode:
+                            pincode
+
+                    })
+
+                }
+            )
+
+
+        const addressResult =
+            await addressResponse.json()
+
+
+        if (
+            addressResult.status !==
+            "success"
+        ) {
+
+            alert(
+                addressResult.message ||
+                "Address save failed"
+            )
+
+            saveButton.disabled = false
+
+            saveButton.textContent =
+                "Save Address"
+
+            return
+
+        }
+
+
+        selectedAddressId =
+            addressResult.data.address_id
+
+
+        /* =========================
+           PLACE ORDER
+        ========================= */
+
+        const finalAmount =
+            subtotal -
+            productDiscount
+
+
+        const orderResponse =
+            await fetch(
+                `${API_URL}/order`,
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body: JSON.stringify({
+
+                        user_id:
+                            userId,
+
+                        address_id:
+                            selectedAddressId,
+
+                        total_amount:
+                            subtotal,
+
+                        discount_amount:
+                            productDiscount,
+
+                        final_amount:
+                            finalAmount,
+
+                        payment_method:
+                            paymentMethod
+
+                    })
+
+                }
+            )
+
+
+        const orderResult =
+            await orderResponse.json()
+
+
+        if (
+            orderResult.status ===
+            "success"
+        ) {
+
+
+            localStorage.setItem(
+                "order_id",
+                orderResult.data.order_id
+            )
+
+
+            window.location.href =
+                "order-success.html"
+
+
+        } else {
+
+            alert(
+                orderResult.message ||
+                "Order failed"
+            )
+
+            saveButton.disabled = false
+
+            saveButton.textContent =
+                "Save Address"
+
+        }
+
+
+    } catch (error) {
+
+        console.log(error)
+
+        alert(
+            "Order placement failed"
+        )
+
+        saveButton.disabled = false
+
+        saveButton.textContent =
+            "Save Address"
+
+    }
+
+}
+
+
+/* =========================
+   PAGE LOAD
+========================= */
+
+loadCart()
+
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
