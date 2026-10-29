@@ -12,7 +12,7 @@ const orderRouter = require('./Router/orderRouter');
 const adminRouter = require('./Router/adminRouter');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -74,6 +74,6 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
 
