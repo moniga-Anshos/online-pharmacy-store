@@ -157,8 +157,8 @@
 </div>
 
 <script>
-    // Changed to empty string so it uses the live Render domain automatically
-    const API_URL = "";
+    // Local-ah iruntha localhost-um, Render live-la iruntha automatic-ah live domain-um edukum
+    const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
     async function adminLogin() {
         const email =
