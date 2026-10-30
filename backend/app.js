@@ -34,17 +34,16 @@ console.log('Frontend exists:', fs.existsSync(frontendPath));
 console.log('User folder exists:', fs.existsSync(userPath));
 console.log('Admin folder exists:', fs.existsSync(adminPath));
 
-// Serve frontend files
 if (fs.existsSync(frontendPath)) {
     app.use(express.static(frontendPath));
 }
 
 if (fs.existsSync(userPath)) {
-    app.use('/user', express.static(userPath));
+    app.use('/user', express.static(userPath, { extensions: ['html', 'htm'] }));
 }
 
 if (fs.existsSync(adminPath)) {
-    app.use('/admin', express.static(adminPath));
+    app.use('/admin', express.static(adminPath, { extensions: ['html', 'htm'] }));
 }
 
 // Uploaded files
