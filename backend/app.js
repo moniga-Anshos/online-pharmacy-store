@@ -52,13 +52,13 @@ app.use(
     express.static(path.join(backendPath, 'uploads'))
 );
 
-// Backend routes
-app.use('/user', userRouter);
-app.use('/product', productRouter);
-app.use('/wishlist', wishlistRouter);
-app.use('/cart', cartRouter);
-app.use('/order', orderRouter);
-app.use('/admin', adminRouter);
+// Backend routes (With /api prefix)
+app.use('/api/user', userRouter);
+app.use('/api/product', productRouter);
+app.use('/api/wishlist', wishlistRouter);
+app.use('/api/cart', cartRouter);
+app.use('/api/order', orderRouter);
+app.use('/api/admin', adminRouter);
 
 // Home
 app.get('/', (req, res) => {
