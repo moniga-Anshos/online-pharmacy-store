@@ -272,9 +272,9 @@
     async function loadDashboardData() {
         try {
             const [productResponse, customerResponse, orderResponse] = await Promise.all([
-                fetch(`${API_URL}/api/products`),
-                fetch(`${API_URL}/api/admin/customers`),
-                fetch(`${API_URL}/api/admin/orders`)
+                fetch(`${API_URL}/product`),
+                fetch(`${API_URL}/admin/customers`),
+                fetch(`${API_URL}/admin/orders`)
             ]);
             
             const productResult = await productResponse.json();

@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - MediCare Pharmacy</title>
     <style>
         * {
@@ -110,137 +107,75 @@
 
 <div class="login-container">
     <div class="login-card">
-        <div class="logo">
-            MediCare Pharmacy
-        </div>
+        <div class="logo">MediCare Pharmacy</div>
         <div class="title">
             <h2>Admin Login</h2>
-            <p>
-                Login to manage the pharmacy store
-            </p>
+            <p>Login to manage the pharmacy store</p>
         </div>
         <div class="form-group">
-            <label for="email">
-                Email
-            </label>
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter admin email"
-            >
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter admin email">
         </div>
         <div class="form-group">
-            <label for="password">
-                Password
-            </label>
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter admin password"
-            >
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter admin password">
         </div>
-        <button
-            class="login-btn"
-            onclick="adminLogin()">
-            Login
-        </button>
-        <div
-            id="message"
-            class="message">
-        </div>
+        <button class="login-btn" onclick="adminLogin()">Login</button>
+        <div id="message" class="message"></div>
         <div class="back-link">
-            <a href="../user/index.html">
-                ← Back to User Store
-            </a>
+            <a href="../user/index.html">← Back to User Store</a>
         </div>
     </div>
 </div>
 
 <script>
-    // Local-ah iruntha localhost-um, Render live-la iruntha automatic-ah live domain-um edukum
     const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
     async function adminLogin() {
-        const email =
-            document.getElementById("email").value.trim()
-
-        const password =
-            document.getElementById("password").value
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
 
         if (email === "" || password === "") {
-            showMessage(
-                "Please enter email and password",
-                "red"
-            )
-            return
+            showMessage("Please enter email and password", "red");
+            return;
         }
 
         try {
-            const response = await fetch(
-                `${API_URL}/admin/login`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password
-                    })
-                }
-            )
+            const response = await fetch(`${API_URL}/admin/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-            const result = await response.json()
+            const result = await response.json();
 
             if (result.status === "success") {
-                const admin = result.data
+                const admin = result.data;
 
-                localStorage.setItem(
-                    "admin_id",
-                    admin.admin_id
-                )
+                localStorage.setItem("admin_id", admin.admin_id);
+                localStorage.setItem("admin_name", admin.admin_name);
+                localStorage.setItem("admin_email", admin.email);
 
-                localStorage.setItem(
-                    "admin_name",
-                    admin.admin_name
-                )
-
-                localStorage.setItem(
-                    "admin_email",
-                    admin.email
-                )
-
-                showMessage(
-                    "Login successful",
-                    "green"
-                )
+                showMessage("Login successful", "green");
 
                 setTimeout(() => {
-                    window.location.href =
-                        "dashboard.html"
-                }, 500)
+                    window.location.href = "dashboard.html";
+                }, 500);
+            } else {
+                showMessage(result.message || "Invalid login details", "red");
             }
-            else {
-                showMessage(
-                    result.message || "Invalid login details",
-                    "red"
-                )
-            }
-        }
-        catch (error) {
-            console.log(error)
-            showMessage(
-                "Server error. Please try again.",
-                "red"
-            )
+        } catch (error) {
+            console.log(error);
+            showMessage("Server error. Please try again.", "red");
         }
     }
 
     function showMessage(message, color) {
-        const messageBox =
-            document.getElementById("message")
-        messageBox.innerText = message
-        messageBox.style.color = color
+        const messageBox = document.getElementById("message");
+        messageBox.innerText = message;
+        messageBox.style.color = color;
     }
 </script>
 
