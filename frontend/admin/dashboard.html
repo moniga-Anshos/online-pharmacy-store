@@ -276,25 +276,28 @@
                 fetch(`${API_URL}/api/admin/customers`),
                 fetch(`${API_URL}/api/admin/orders`)
             ]);
-            const [productResult, customerResult, orderResult] = await Promise.all([
-                productResponse.json(), 
-                customerResponse.json(), 
-                orderResponse.json()
-            ]);
+            
+            const productResult = await productResponse.json();
+            const customerResult = await customerResponse.json();
+            const orderResult = await orderResponse.json();
 
-            if (productResponse.ok && productResult.status === "success") {
-                document.getElementById("productCount").innerText = (productResult.data || []).length;
-            }
-            if (customerResponse.ok && customerResult.status === "success") {
-                document.getElementById("customerCount").innerText = (customerResult.data || []).length;
-            }
-            if (orderResponse.ok && orderResult.status === "success") {
-                const orders = orderResult.data || [];
-                document.getElementById("orderCount").innerText = orders.length;
-                document.getElementById("pendingCount").innerText = orders.filter(order =>
-                    (order.status || order.order_status || "pending").toLowerCase() === "pending"
-                ).length;
-            }
+            // Products Count
+            const products = productResult.data || productResult.products || (Array.isArray(productResult) ? productResult : []);
+            document.getElementById("productCount").innerText = products.length;
+
+            // Customers Count
+            const customers = customerResult.data || customerResult.customers || (Array.isArray(customerResult) ? customerResult : []);
+            document.getElementById("customerCount").innerText = customers.length;
+
+            // Orders Count & Pending Orders
+            const orders = orderResult.data || orderResult.orders || (Array.isArray(orderResult) ? orderResult : []);
+            document.getElementById("orderCount").innerText = orders.length;
+            
+            const pendingOrders = orders.filter(order => 
+                (order.status || order.order_status || "pending").toLowerCase() === "pending"
+            );
+            document.getElementById("pendingCount").innerText = pendingOrders.length;
+
         } catch (error) {
             console.error("Dashboard data loading failed:", error);
         }
