@@ -1,36 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Details - Admin</title>
-
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-
         body {
             background: #f5f7fa;
             color: #333;
         }
-
-
-        /* HEADER */
-
         header {
             background: white;
             padding: 18px 6%;
@@ -39,13 +23,11 @@
             align-items: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-
         .logo {
             color: #1976d2;
             font-size: 24px;
             font-weight: bold;
         }
-
         .back-btn {
             padding: 9px 16px;
             border: none;
@@ -54,24 +36,15 @@
             color: white;
             cursor: pointer;
         }
-
-
-        /* CONTAINER */
-
         .container {
             width: 90%;
             max-width: 1100px;
             margin: 40px auto;
         }
-
         h1 {
             color: #1976d2;
             margin-bottom: 25px;
         }
-
-
-        /* CARD */
-
         .card {
             background: white;
             padding: 25px;
@@ -79,138 +52,78 @@
             margin-bottom: 25px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
         .card h2 {
             color: #1976d2;
             margin-bottom: 20px;
         }
-
-
-        /* PROFILE */
-
         .profile-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
-
         .info {
             padding: 15px;
             background: #f5f7fa;
             border-radius: 7px;
         }
-
         .info strong {
             display: block;
             color: #777;
             font-size: 13px;
             margin-bottom: 6px;
         }
-
-
-        /* STATUS */
-
         .status {
             display: inline-block;
             padding: 5px 12px;
             border-radius: 15px;
             font-size: 12px;
         }
-
         .active {
             background: #d4edda;
             color: #155724;
         }
-
         .inactive {
             background: #f8d7da;
             color: #721c24;
         }
-
-
-        /* ADDRESS */
-
         .address {
             border: 1px solid #ddd;
             padding: 15px;
             border-radius: 7px;
             margin-bottom: 12px;
         }
-
         .address p {
             margin-bottom: 7px;
         }
-
-
-        /* TABLE */
-
         .table-container {
             overflow-x: auto;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
             min-width: 900px;
         }
-
-        th,
-        td {
+        th, td {
             padding: 13px;
             border-bottom: 1px solid #ddd;
             text-align: left;
         }
-
         th {
             background: #f5f7fa;
         }
-
-
-        /* ORDER STATUS */
-
         .order-status {
             display: inline-block;
             padding: 5px 10px;
             border-radius: 15px;
             font-size: 12px;
         }
-
-        .pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .confirmed {
-            background: #cce5ff;
-            color: #004085;
-        }
-
-        .packed {
-            background: #e2e3e5;
-            color: #383d41;
-        }
-
-        .shipped {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .out-for-delivery {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .delivered {
-            background: #c3e6cb;
-            color: #155724;
-        }
-
-        .cancelled {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-
+        .pending { background: #fff3cd; color: #856404; }
+        .confirmed { background: #cce5ff; color: #004085; }
+        .packed { background: #e2e3e5; color: #383d41; }
+        .shipped { background: #d1ecf1; color: #0c5460; }
+        .out-for-delivery { background: #d4edda; color: #155724; }
+        .delivered { background: #c3e6cb; color: #155724; }
+        .cancelled { background: #f8d7da; color: #721c24; }
         .view-btn {
             padding: 7px 12px;
             border: none;
@@ -219,823 +132,226 @@
             color: white;
             cursor: pointer;
         }
-
-
         .message {
             text-align: center;
             margin: 20px 0;
             font-size: 14px;
         }
-
-
-        /* RESPONSIVE */
-
         @media (max-width: 650px) {
-
-            header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-
-            .container {
-                width: 94%;
-            }
-
-            .profile-grid {
-                grid-template-columns: 1fr;
-            }
-
+            header { flex-direction: column; gap: 15px; align-items: flex-start; }
+            .container { width: 94%; }
+            .profile-grid { grid-template-columns: 1fr; }
         }
-
     </style>
-
 </head>
-
-
 <body>
 
-
 <header>
-
-    <div class="logo">
-        MediCare Pharmacy
-    </div>
-
-
-    <button
-        class="back-btn"
-        onclick="goBack()"
-    >
-        ← Customers
-    </button>
-
+    <div class="logo">MediCare Pharmacy</div>
+    <button class="back-btn" onclick="goBack()">← Customers</button>
 </header>
 
-
-
 <div class="container">
-
-
-    <h1>
-        Customer Details
-    </h1>
-
-
-    <div
-        id="message"
-        class="message"
-    >
-    </div>
-
-
-
-    <!-- CUSTOMER PROFILE -->
+    <h1>Customer Details</h1>
+    <div id="message" class="message"></div>
 
     <div class="card">
-
-        <h2>
-            Customer Profile
-        </h2>
-
-
-        <div
-            id="customerInfo"
-            class="profile-grid"
-        >
-        </div>
-
+        <h2>Customer Profile</h2>
+        <div id="customerInfo" class="profile-grid"></div>
     </div>
 
-
-
-    <!-- ADDRESSES -->
-
     <div class="card">
-
-        <h2>
-            Customer Addresses
-        </h2>
-
-
-        <div id="addressList">
-        </div>
-
+        <h2>Customer Addresses</h2>
+        <div id="addressList"></div>
     </div>
 
-
-
-    <!-- ORDER HISTORY -->
-
     <div class="card">
-
-        <h2>
-            Order History
-        </h2>
-
-
+        <h2>Order History</h2>
         <div class="table-container">
-
             <table>
-
                 <thead>
-
                     <tr>
-
-                        <th>
-                            Order ID
-                        </th>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Amount
-                        </th>
-
-                        <th>
-                            Payment Method
-                        </th>
-
-                        <th>
-                            Payment Status
-                        </th>
-
-                        <th>
-                            Order Status
-                        </th>
-
-                        <th>
-                            Expected Delivery
-                        </th>
-
-                        <th>
-                            Action
-                        </th>
-
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Payment Status</th>
+                        <th>Order Status</th>
+                        <th>Expected Delivery</th>
+                        <th>Action</th>
                     </tr>
-
                 </thead>
-
-
-                <tbody id="orderBody">
-                </tbody>
-
+                <tbody id="orderBody"></tbody>
             </table>
-
         </div>
-
     </div>
-
-
 </div>
 
-
-
 <script>
-
-
-    /* =========================
-       API
-    ========================= */
-
     const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-
-    /* =========================
-       ADMIN LOGIN CHECK
-    ========================= */
-
-    const adminId =
-        localStorage.getItem("admin_id")
-
-
+    const adminId = localStorage.getItem("admin_id");
     if (!adminId) {
-
-        window.location.href =
-            "admin-login.html"
-
+        window.location.href = "admin-login.html";
     }
 
-
-    /* =========================
-       SELECTED CUSTOMER
-    ========================= */
-
-    const customerId =
-        localStorage.getItem(
-            "selectedCustomerId"
-        )
-
-
+    const customerId = localStorage.getItem("selectedCustomerId");
     if (!customerId) {
-
-        window.location.href =
-            "customers.html"
-
+        window.location.href = "customers.html";
     }
-
-
-    /* =========================
-       LOAD CUSTOMER DETAILS
-    ========================= */
 
     async function loadCustomer() {
-
         try {
-
-            const response =
-                await fetch(
-                    `${API_URL}/admin/customers/${customerId}`
-                )
-
-
-            console.log(
-                "Customer Details Status:",
-                response.status
-            )
-
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/admin/customers/${customerId}`);
 
             if (!response.ok) {
-
-                throw new Error(
-                    `HTTP Error: ${response.status}`
-                )
-
+                throw new Error(`HTTP Error: ${response.status}`);
             }
 
+            const result = await response.json();
 
-            const result =
-                await response.json()
-
-
-            console.log(
-                "Customer Details Response:",
-                result
-            )
-
-
-            if (
-                result.status !== "success"
-            ) {
-
-                throw new Error(
-                    result.message ||
-                    "Failed to load customer details"
-                )
-
+            if (result.status !== "success") {
+                throw new Error(result.message || "Failed to load customer details");
             }
 
-
-            const data =
-                result.data
-
-
+            const data = result.data;
             if (!data) {
-
-                throw new Error(
-                    "Customer details not found"
-                )
-
+                throw new Error("Customer details not found");
             }
 
+            const customer = data.customer || data;
+            const addresses = Array.isArray(data.addresses) ? data.addresses : [];
+            const orders = Array.isArray(data.orders) ? data.orders : [];
 
-            const customer =
-                data.customer || data
+            displayCustomer(customer);
+            displayAddresses(addresses);
+            displayOrders(orders);
 
-
-            const addresses =
-                Array.isArray(
-                    data.addresses
-                )
-                    ? data.addresses
-                    : []
-
-
-            const orders =
-                Array.isArray(
-                    data.orders
-                )
-                    ? data.orders
-                    : []
-
-
-            displayCustomer(
-                customer
-            )
-
-
-            displayAddresses(
-                addresses
-            )
-
-
-            displayOrders(
-                orders
-            )
-
+        } catch (error) {
+            console.log("Load customer error:", error);
+            showMessage(error.message || "Failed to load customer details");
         }
-        catch (error) {
-
-            console.log(
-                "Load customer error:",
-                error
-            )
-
-
-            showMessage(
-                error.message ||
-                "Failed to load customer details"
-            )
-
-        }
-
     }
-
-
-    /* =========================
-       DISPLAY CUSTOMER
-    ========================= */
 
     function displayCustomer(customer) {
-
         if (!customer) {
-
-            showMessage(
-                "Customer not found"
-            )
-
-            return
-
+            showMessage("Customer not found");
+            return;
         }
 
+        const isActive = customer.isactive === true;
+        const statusClass = isActive ? "active" : "inactive";
+        const statusText = isActive ? "Active" : "Inactive";
 
-        const isActive =
-            customer.isactive === true
-
-
-        const statusClass =
-            isActive
-                ? "active"
-                : "inactive"
-
-
-        const statusText =
-            isActive
-                ? "Active"
-                : "Inactive"
-
-
-        document.getElementById(
-            "customerInfo"
-        ).innerHTML = `
-
+        document.getElementById("customerInfo").innerHTML = `
             <div class="info">
-
-                <strong>
-                    Customer ID
-                </strong>
-
+                <strong>Customer ID</strong>
                 ${customer.user_id || "-"}
-
             </div>
-
-
             <div class="info">
-
-                <strong>
-                    Name
-                </strong>
-
+                <strong>Name</strong>
                 ${customer.user_name || "-"}
-
             </div>
-
-
             <div class="info">
-
-                <strong>
-                    Email
-                </strong>
-
+                <strong>Email</strong>
                 ${customer.email || "-"}
-
             </div>
-
-
             <div class="info">
-
-                <strong>
-                    Phone
-                </strong>
-
+                <strong>Phone</strong>
                 ${customer.phone || "-"}
-
             </div>
-
-
             <div class="info">
-
-                <strong>
-                    Registered Date
-                </strong>
-
-                ${formatDate(
-                    customer.createdon
-                )}
-
+                <strong>Registered Date</strong>
+                ${formatDate(customer.createdon)}
             </div>
-
-
             <div class="info">
-
-                <strong>
-                    Status
-                </strong>
-
-                <span
-                    class="status ${statusClass}"
-                >
-
-                    ${statusText}
-
-                </span>
-
+                <strong>Status</strong>
+                <span class="status ${statusClass}">${statusText}</span>
             </div>
-
-        `
-
+        `;
     }
-
-
-    /* =========================
-       DISPLAY ADDRESSES
-    ========================= */
 
     function displayAddresses(addresses) {
+        const addressList = document.getElementById("addressList");
+        addressList.innerHTML = "";
 
-        const addressList =
-            document.getElementById(
-                "addressList"
-            )
-
-
-        addressList.innerHTML = ""
-
-
-        if (
-            !Array.isArray(addresses) ||
-            addresses.length === 0
-        ) {
-
-            addressList.innerHTML = `
-
-                <p>
-                    No address found
-                </p>
-
-            `
-
-            return
-
+        if (!Array.isArray(addresses) || addresses.length === 0) {
+            addressList.innerHTML = `<p>No address found</p>`;
+            return;
         }
-
 
         addresses.forEach(address => {
-
             addressList.innerHTML += `
-
                 <div class="address">
-
-
-                    <p>
-
-                        <strong>
-                            Phone:
-                        </strong>
-
-                        ${address.phone || "-"}
-
-                    </p>
-
-
-                    <p>
-
-                        <strong>
-                            Address:
-                        </strong>
-
-                        ${address.address || "-"}
-
-                    </p>
-
-
-                    <p>
-
-                        <strong>
-                            Location:
-                        </strong>
-
-                        ${address.city || "-"},
-                        ${address.state || "-"}
-                        -
-                        ${address.pincode || "-"}
-
-                    </p>
-
-
-                    ${
-                        address.isdefault === true
-                        ?
-                        `
-                            <p>
-
-                                <strong>
-                                    Default Address
-                                </strong>
-
-                            </p>
-                        `
-                        :
-                        ""
-                    }
-
-
+                    <p><strong>Phone:</strong> ${address.phone || "-"}</p>
+                    <p><strong>Address:</strong> ${address.address || "-"}</p>
+                    <p><strong>Location:</strong> ${address.city || "-"}, ${address.state || "-"} - ${address.pincode || "-"}</p>
+                    ${address.isdefault === true ? `<p><strong>Default Address</strong></p>` : ""}
                 </div>
-
-            `
-
-        })
-
+            `;
+        });
     }
-
-
-    /* =========================
-       DISPLAY ORDERS
-    ========================= */
 
     function displayOrders(orders) {
+        const orderBody = document.getElementById("orderBody");
+        orderBody.innerHTML = "";
 
-        const orderBody =
-            document.getElementById(
-                "orderBody"
-            )
-
-
-        orderBody.innerHTML = ""
-
-
-        if (
-            !Array.isArray(orders) ||
-            orders.length === 0
-        ) {
-
-            orderBody.innerHTML = `
-
-                <tr>
-
-                    <td
-                        colspan="8"
-                        style="text-align:center;"
-                    >
-
-                        No orders found
-
-                    </td>
-
-                </tr>
-
-            `
-
-            return
-
+        if (!Array.isArray(orders) || orders.length === 0) {
+            orderBody.innerHTML = `<tr><td colspan="8" style="text-align:center;">No orders found</td></tr>`;
+            return;
         }
-
 
         orders.forEach(order => {
-
-            const orderId =
-                order.order_id || "-"
-
-
-            const finalAmount =
-                Number(
-                    order.final_amount || 0
-                )
-
-
-            const paymentMethod =
-                order.payment_method || "-"
-
-
-            const paymentStatus =
-                order.payment_status || "-"
-
-
-            const orderStatus =
-                String(
-                    order.order_status ||
-                    "pending"
-                ).toLowerCase()
-
-
-            const statusClass =
-                orderStatus
-                    .replaceAll(
-                        " ",
-                        "-"
-                    )
-
-
-            const expectedDelivery =
-                formatDate(
-                    order.expected_delivery_date
-                )
-
+            const orderId = order.order_id || "-";
+            const finalAmount = Number(order.final_amount || 0);
+            const paymentMethod = order.payment_method || "-";
+            const paymentStatus = order.payment_status || "-";
+            const orderStatus = String(order.order_status || "pending").toLowerCase();
+            const statusClass = orderStatus.replaceAll(" ", "-");
+            const expectedDelivery = formatDate(order.expected_delivery_date);
 
             orderBody.innerHTML += `
-
                 <tr>
-
-                    <td>
-                        #${orderId}
-                    </td>
-
-
-                    <td>
-                        ${formatDate(
-                            order.createdon
-                        )}
-                    </td>
-
-
-                    <td>
-                        ₹${finalAmount.toFixed(2)}
-                    </td>
-
-
-                    <td>
-                        ${paymentMethod}
-                    </td>
-
-
-                    <td>
-                        ${paymentStatus}
-                    </td>
-
-
-                    <td>
-
-                        <span
-                            class="order-status ${statusClass}"
-                        >
-
-                            ${orderStatus}
-
-                        </span>
-
-                    </td>
-
-
-                    <td>
-                        ${expectedDelivery}
-                    </td>
-
-
-                    <td>
-
-                        <button
-                            class="view-btn"
-                            onclick="viewOrder(${orderId})"
-                        >
-
-                            View
-
-                        </button>
-
-                    </td>
-
+                    <td>#${orderId}</td>
+                    <td>${formatDate(order.createdon)}</td>
+                    <td>₹${finalAmount.toFixed(2)}</td>
+                    <td>${paymentMethod}</td>
+                    <td>${paymentStatus}</td>
+                    <td><span class="order-status ${statusClass}">${orderStatus}</span></td>
+                    <td>${expectedDelivery}</td>
+                    <td><button class="view-btn" onclick="viewOrder(${orderId})">View</button></td>
                 </tr>
-
-            `
-
-        })
-
+            `;
+        });
     }
-
-
-    /* =========================
-       VIEW ORDER
-    ========================= */
 
     function viewOrder(orderId) {
-
-        /*
-
-            User order-details.html expects
-            selectedOrderId
-
-        */
-
-        localStorage.setItem(
-            "selectedOrderId",
-            orderId
-        )
-
-
-        /*
-            order-details.html is
-            inside user folder
-        */
-
-        window.location.href =
-            "../user/order-details.html"
-
+        localStorage.setItem("selectedOrderId", orderId);
+        window.location.href = "../user/order-details.html";
     }
-
-
-    /* =========================
-       DATE FORMAT
-    ========================= */
 
     function formatDate(date) {
-
-        if (!date) {
-
-            return "-"
-
-        }
-
-
-        const newDate =
-            new Date(date)
-
-
-        if (
-            isNaN(
-                newDate.getTime()
-            )
-        ) {
-
-            return "-"
-
-        }
-
-
-        return newDate.toLocaleDateString(
-            "en-IN",
-            {
-
-                day: "2-digit",
-
-                month: "short",
-
-                year: "numeric"
-
-            }
-        )
-
+        if (!date) return "-";
+        const newDate = new Date(date);
+        if (isNaN(newDate.getTime())) return "-";
+        return newDate.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
     }
-
-
-    /* =========================
-       MESSAGE
-    ========================= */
 
     function showMessage(message) {
-
-        document.getElementById(
-            "message"
-        ).innerText =
-            message
-
+        document.getElementById("message").innerText = message;
     }
-
-
-    /* =========================
-       BACK
-    ========================= */
 
     function goBack() {
-
-        window.location.href =
-            "customers.html"
-
+        window.location.href = "customers.html";
     }
 
-
-    /* =========================
-       LOAD
-    ========================= */
-
-    loadCustomer()
-
-
+    loadCustomer();
 </script>
 
-
 </body>
-
 </html>
-
