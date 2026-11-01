@@ -318,189 +318,99 @@
 
 
 <script>
-
     const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-    const userId = localStorage.getItem("user_id")
-
+    const userId = localStorage.getItem("user_id");
 
     if (!userId) {
-
-        window.location.href = "login.html"
-
+        window.location.href = "login.html";
     }
     else {
-
-        loadProfile()
-
+        loadProfile();
     }
-
 
     async function loadProfile() {
-
         try {
-
-            const response = await fetch(
-                `${API_URL}/user/profile/${userId}`
-            )
-
-            const result = await response.json()
-
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/user/profile/${userId}`);
+            const result = await response.json();
 
             if (result.status === "success" && result.data) {
-
-                document.getElementById("userName").value =
-                    result.data.user_name || ""
-
-
-                document.getElementById("email").value =
-                    result.data.email || ""
-
-
-                document.getElementById("phone").value =
-                    result.data.phone || ""
-
+                document.getElementById("userName").value = result.data.user_name || "";
+                document.getElementById("email").value = result.data.email || "";
+                document.getElementById("phone").value = result.data.phone || "";
             }
-
         }
         catch (error) {
-
-            console.log(error)
-
-            showMessage(
-                "Failed to load profile",
-                "red"
-            )
-
+            console.log(error);
+            showMessage("Failed to load profile", "red");
         }
-
     }
-
 
     async function updateProfile() {
-
-        const userName =
-            document.getElementById("userName").value.trim()
-
-
-        const phone =
-            document.getElementById("phone").value.trim()
-
+        const userName = document.getElementById("userName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
 
         if (userName === "") {
-
-            showMessage(
-                "Please enter your name",
-                "red"
-            )
-
-            return
-
+            showMessage("Please enter your name", "red");
+            return;
         }
-
 
         try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/user/profile/${userId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_name: userName,
+                    phone: phone
+                })
+            });
 
-            const response = await fetch(
-                `${API_URL}/user/profile/${userId}`,
-                {
-                    method: "PUT",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        user_name: userName,
-                        phone: phone
-                    })
-                }
-            )
-
-
-            const result = await response.json()
-
+            const result = await response.json();
 
             if (result.status === "success") {
-
-                localStorage.setItem(
-                    "user_name",
-                    userName
-                )
-
-                showMessage(
-                    "Profile updated successfully",
-                    "green"
-                )
-
+                localStorage.setItem("user_name", userName);
+                showMessage("Profile updated successfully", "green");
             }
             else {
-
-                showMessage(
-                    result.message || "Update failed",
-                    "red"
-                )
-
+                showMessage(result.message || "Update failed", "red");
             }
-
         }
         catch (error) {
-
-            console.log(error)
-
-            showMessage(
-                "Profile update failed",
-                "red"
-            )
-
+            console.log(error);
+            showMessage("Profile update failed", "red");
         }
-
     }
-
 
     function manageAddress() {
-
-        window.location.href = "checkout.html"
-
+        window.location.href = "checkout.html";
     }
-
 
     function logout() {
-
-        const confirmLogout =
-            confirm("Are you sure you want to logout?")
-
+        const confirmLogout = confirm("Are you sure you want to logout?");
 
         if (!confirmLogout) {
-
-            return
-
+            return;
         }
 
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_name");
+        localStorage.removeItem("user_email");
+        localStorage.removeItem("selectedProductId");
+        localStorage.removeItem("selectedOrderId");
+        localStorage.removeItem("cart_total");
 
-        localStorage.removeItem("user_id")
-        localStorage.removeItem("user_name")
-        localStorage.removeItem("user_email")
-        localStorage.removeItem("selectedProductId")
-        localStorage.removeItem("selectedOrderId")
-        localStorage.removeItem("cart_total")
-
-
-        window.location.href = "login.html"
-
+        window.location.href = "login.html";
     }
-
 
     function showMessage(message, color) {
-
-        const messageBox =
-            document.getElementById("message")
-
-        messageBox.innerText = message
-        messageBox.style.color = color
-
+        const messageBox = document.getElementById("message");
+        messageBox.innerText = message;
+        messageBox.style.color = color;
     }
-
 </script>
 
 </body>

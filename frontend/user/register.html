@@ -359,184 +359,70 @@
     </footer>
 
 
-    <script>
-
-        const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
-
-
-        document
-            .getElementById("registerForm")
-            .addEventListener(
-                "submit",
-                async function(event) {
-
-                    event.preventDefault()
-
-
-                    const user_name =
-                        document.getElementById(
-                            "user_name"
-                        ).value.trim()
-
-
-                    const email =
-                        document.getElementById(
-                            "email"
-                        ).value.trim()
-
-
-                    const phone =
-                        document.getElementById(
-                            "phone"
-                        ).value.trim()
-
-
-                    const password =
-                        document.getElementById(
-                            "password"
-                        ).value
-
-
-                    const confirm_password =
-                        document.getElementById(
-                            "confirm_password"
-                        ).value
-
-
-                    const message =
-                        document.getElementById(
-                            "message"
-                        )
-
-
-                    const button =
-                        document.getElementById(
-                            "registerButton"
-                        )
-
-
-                    /* PASSWORD CHECK */
-
-                    if (password !== confirm_password) {
-
-                        message.textContent =
-                            "Passwords do not match"
-
-                        message.style.color =
-                            "red"
-
-                        return
-
-                    }
-
-
-                    try {
-
-                        button.disabled = true
-
-                        button.textContent =
-                            "Creating Account..."
-
-
-                        const response =
-                            await fetch(
-                                `${API_URL}/user/register`,
-                                {
-                                    method: "POST",
-
-                                    headers: {
-                                        "Content-Type":
-                                            "application/json"
-                                    },
-
-                                    body: JSON.stringify({
-
-                                        user_name:
-                                            user_name,
-
-                                        email:
-                                            email,
-
-                                        phone:
-                                            phone,
-
-                                        password:
-                                            password
-
-                                    })
-                                }
-                            )
-
-
-                        const result =
-                            await response.json()
-
-
-                        if (
-                            response.ok &&
-                            result.status === "success"
-                        ) {
-
-                            message.textContent =
-                                "Registration successful! Redirecting to login..."
-
-                            message.style.color =
-                                "green"
-
-
-                            document
-                                .getElementById(
-                                    "registerForm"
-                                )
-                                .reset()
-
-
-                            setTimeout(
-                                function() {
-
-                                    window.location.href =
-                                        "login.html"
-
-                                },
-                                1500
-                            )
-
-                        } else {
-
-                            message.textContent =
-                                result.error ||
-                                result.message ||
-                                "Registration failed"
-
-                            message.style.color =
-                                "red"
-
-                        }
-
-                    } catch (error) {
-
-                        console.log(error)
-
-                        message.textContent =
-                            "Unable to connect to server"
-
-                        message.style.color =
-                            "red"
-
-                    } finally {
-
-                        button.disabled = false
-
-                        button.textContent =
-                            "Create Account"
-
-                    }
-
-                }
-            )
-
-    </script>
-
+   <script>
+    const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
+
+    document.getElementById("registerForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        const user_name = document.getElementById("user_name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+        const confirm_password = document.getElementById("confirm_password").value;
+        const message = document.getElementById("message");
+        const button = document.getElementById("registerButton");
+
+        /* PASSWORD CHECK */
+        if (password !== confirm_password) {
+            message.textContent = "Passwords do not match";
+            message.style.color = "red";
+            return;
+        }
+
+        try {
+            button.disabled = true;
+            button.textContent = "Creating Account...";
+
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/user/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_name: user_name,
+                    email: email,
+                    phone: phone,
+                    password: password
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.status === "success") {
+                message.textContent = "Registration successful! Redirecting to login...";
+                message.style.color = "green";
+
+                document.getElementById("registerForm").reset();
+
+                setTimeout(function() {
+                    window.location.href = "login.html";
+                }, 1500);
+            } else {
+                message.textContent = result.error || result.message || "Registration failed";
+                message.style.color = "red";
+            }
+        } catch (error) {
+            console.log(error);
+            message.textContent = "Unable to connect to server";
+            message.style.color = "red";
+        } finally {
+            button.disabled = false;
+            button.textContent = "Create Account";
+        }
+    });
+</script>
 
 </body>
 

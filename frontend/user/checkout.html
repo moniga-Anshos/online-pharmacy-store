@@ -1,20 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -167,751 +158,293 @@
         }
 
         @media(max-width: 768px) {
-
             .checkout {
                 grid-template-columns: 1fr;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
-
     <h1>Checkout</h1>
 
-
     <div class="checkout">
-
-
         <!-- LEFT SIDE -->
-
         <div>
-
-
             <!-- DELIVERY ADDRESS -->
-
             <div class="box">
-
                 <h2>Delivery Address</h2>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Phone Number
-                    </label>
-
-                    <input
-                        type="text"
-                        id="phone"
-                        placeholder="Enter phone number"
-                        maxlength="15"
-                    >
-
+                    <label>Phone Number</label>
+                    <input type="text" id="phone" placeholder="Enter phone number" maxlength="15">
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Full Address
-                    </label>
-
-                    <textarea
-                        id="address"
-                        placeholder="Enter your complete delivery address"
-                    ></textarea>
-
+                    <label>Full Address</label>
+                    <textarea id="address" placeholder="Enter your complete delivery address"></textarea>
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        City
-                    </label>
-
-                    <input
-                        type="text"
-                        id="city"
-                        placeholder="City"
-                    >
-
+                    <label>City</label>
+                    <input type="text" id="city" placeholder="City">
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        State
-                    </label>
-
-                    <input
-                        type="text"
-                        id="state"
-                        placeholder="State"
-                    >
-
+                    <label>State</label>
+                    <input type="text" id="state" placeholder="State">
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Pincode
-                    </label>
-
-                    <input
-                        type="text"
-                        id="pincode"
-                        placeholder="Pincode"
-                        maxlength="10"
-                    >
-
+                    <label>Pincode</label>
+                    <input type="text" id="pincode" placeholder="Pincode" maxlength="10">
                 </div>
-
             </div>
-
 
             <!-- PAYMENT -->
-
             <div class="box">
-
                 <h2>Payment Method</h2>
 
-
                 <div class="payment-options">
-
-
                     <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="upi"
-                        >
-
+                        <input type="radio" name="payment" value="upi">
                         <div>
-
-                            <div class="payment-name">
-                                📱 UPI
-                            </div>
-
-                            <div class="payment-description">
-                                Pay using UPI apps
-                            </div>
-
+                            <div class="payment-name">📱 UPI</div>
+                            <div class="payment-description">Pay using UPI apps</div>
                         </div>
-
                     </label>
 
-
                     <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="card"
-                        >
-
+                        <input type="radio" name="payment" value="card">
                         <div>
-
-                            <div class="payment-name">
-                                💳 Card
-                            </div>
-
-                            <div class="payment-description">
-                                Pay using Debit / Credit Card
-                            </div>
-
+                            <div class="payment-name">💳 Card</div>
+                            <div class="payment-description">Pay using Debit / Credit Card</div>
                         </div>
-
                     </label>
 
-
                     <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="net banking"
-                        >
-
+                        <input type="radio" name="payment" value="net banking">
                         <div>
-
-                            <div class="payment-name">
-                                🏦 Net Banking
-                            </div>
-
-                            <div class="payment-description">
-                                Pay using Internet Banking
-                            </div>
-
+                            <div class="payment-name">🏦 Net Banking</div>
+                            <div class="payment-description">Pay using Internet Banking</div>
                         </div>
-
                     </label>
 
-
                     <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="payment"
-                            value="cash on delivery"
-                        >
-
+                        <input type="radio" name="payment" value="cash on delivery">
                         <div>
-
-                            <div class="payment-name">
-                                💵 Cash on Delivery
-                            </div>
-
-                            <div class="payment-description">
-                                Pay when your order is delivered
-                            </div>
-
+                            <div class="payment-name">💵 Cash on Delivery</div>
+                            <div class="payment-description">Pay when your order is delivered</div>
                         </div>
-
                     </label>
-
-
                 </div>
-
 
                 <!-- SAVE ADDRESS -->
-
-                <button
-                    class="save-address"
-                    id="saveAddressBtn"
-                    onclick="saveAddress()"
-                >
-                    Save Address
+                <button class="save-address" id="saveAddressBtn" onclick="saveAddress()">
+                    Save Address & Place Order
                 </button>
-
-
             </div>
-
-
         </div>
-
 
         <!-- RIGHT SIDE -->
-
         <div>
-
             <div class="box">
-
                 <h2>Order Summary</h2>
 
-
                 <div class="summary-row">
-
-                    <span>
-                        Subtotal
-                    </span>
-
-                    <span>
-                        ₹<span id="subtotal">0</span>
-                    </span>
-
+                    <span>Subtotal</span>
+                    <span>₹<span id="subtotal">0</span></span>
                 </div>
-
 
                 <div class="summary-row discount">
-
-                    <span>
-                        Product Discount
-                    </span>
-
-                    <span>
-                        - ₹<span id="productDiscount">0</span>
-                    </span>
-
+                    <span>Product Discount</span>
+                    <span>- ₹<span id="productDiscount">0</span></span>
                 </div>
-
 
                 <div class="summary-row final-row">
-
-                    <span>
-                        Final Amount
-                    </span>
-
-                    <span>
-                        ₹<span id="finalAmount">0</span>
-                    </span>
-
+                    <span>Final Amount</span>
+                    <span>₹<span id="finalAmount">0</span></span>
                 </div>
-
-
             </div>
-
         </div>
-
-
     </div>
-
 </div>
 
-
 <script>
+    const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
+    const userId = localStorage.getItem("user_id");
 
+    let selectedAddressId = null;
+    let cart = [];
+    let subtotal = 0;
+    let productDiscount = 0;
 
-const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
+    /* =========================
+       PAYMENT SELECTION
+    ========================= */
+    const paymentOptions = document.querySelectorAll('input[name="payment"]');
 
+    paymentOptions.forEach(option => {
+        option.addEventListener("change", function () {
+            document.querySelectorAll(".payment-option").forEach(item => {
+                item.classList.remove("selected");
+            });
+            this.closest(".payment-option").classList.add("selected");
+        });
+    });
 
-const userId =
-    localStorage.getItem("user_id")
+    /* =========================
+       LOAD CART
+    ========================= */
+    async function loadCart() {
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/cart/${userId}`);
+            const result = await response.json();
 
+            cart = result.data || [];
+            calculateTotal();
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-let selectedAddressId = null
+    /* =========================
+       CALCULATE TOTAL
+    ========================= */
+    function calculateTotal() {
+        subtotal = 0;
+        productDiscount = 0;
 
-let cart = []
+        cart.forEach(item => {
+            const price = Number(item.price);
+            const quantity = Number(item.quantity);
+            const discount = Number(item.discount || 0);
 
-let subtotal = 0
+            subtotal += price * quantity;
+            productDiscount += (price * quantity * discount) / 100;
+        });
 
-let productDiscount = 0
+        updateSummary();
+    }
 
+    /* =========================
+       UPDATE SUMMARY
+    ========================= */
+    function updateSummary() {
+        const finalAmount = subtotal - productDiscount;
 
-/* =========================
-   PAYMENT SELECTION
-========================= */
+        document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+        document.getElementById("productDiscount").textContent = productDiscount.toFixed(2);
+        document.getElementById("finalAmount").textContent = finalAmount.toFixed(2);
+    }
 
-const paymentOptions =
-    document.querySelectorAll(
-        'input[name="payment"]'
-    )
+    /* =========================
+       SAVE ADDRESS + PLACE ORDER
+    ========================= */
+    async function saveAddress() {
+        const phone = document.getElementById("phone").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const city = document.getElementById("city").value.trim();
+        const state = document.getElementById("state").value.trim();
+        const pincode = document.getElementById("pincode").value.trim();
 
+        if (!phone || !address || !city || !state || !pincode) {
+            alert("Please fill all address details");
+            return;
+        }
 
-paymentOptions.forEach(option => {
+        const selectedPayment = document.querySelector('input[name="payment"]:checked');
+        if (!selectedPayment) {
+            alert("Please select a payment method");
+            return;
+        }
 
-    option.addEventListener(
-        "change",
-        function () {
+        const paymentMethod = selectedPayment.value;
+        const saveButton = document.getElementById("saveAddressBtn");
 
-            document
-                .querySelectorAll(
-                    ".payment-option"
-                )
-                .forEach(item => {
+        saveButton.disabled = true;
+        saveButton.textContent = "Processing...";
 
-                    item.classList.remove(
-                        "selected"
-                    )
-
+        try {
+            /* =========================
+               SAVE ADDRESS
+            ========================= */
+            // FIXED: Added /api prefix to match server.js routes
+            const addressResponse = await fetch(`${API_URL}/api/order/address`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    phone: phone,
+                    address: address,
+                    city: city,
+                    state: state,
+                    pincode: pincode
                 })
+            });
 
+            const addressResult = await addressResponse.json();
 
-            this
-                .closest(
-                    ".payment-option"
-                )
-                .classList.add(
-                    "selected"
-                )
+            if (addressResult.status !== "success") {
+                alert(addressResult.message || "Address save failed");
+                saveButton.disabled = false;
+                saveButton.textContent = "Save Address & Place Order";
+                return;
+            }
 
+            selectedAddressId = addressResult.data.address_id;
+
+            /* =========================
+               PLACE ORDER
+            ========================= */
+            const finalAmount = subtotal - productDiscount;
+
+            // FIXED: Added /api prefix to match server.js routes
+            const orderResponse = await fetch(`${API_URL}/api/order`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: userId,
+                    address_id: selectedAddressId,
+                    total_amount: subtotal,
+                    discount_amount: productDiscount,
+                    final_amount: finalAmount,
+                    payment_method: paymentMethod
+                })
+            });
+
+            const orderResult = await orderResponse.json();
+
+            if (orderResult.status === "success") {
+                localStorage.setItem("order_id", orderResult.data.order_id);
+                window.location.href = "order-success.html";
+            } else {
+                alert(orderResult.message || "Order failed");
+                saveButton.disabled = false;
+                saveButton.textContent = "Save Address & Place Order";
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert("Order placement failed");
+            saveButton.disabled = false;
+            saveButton.textContent = "Save Address & Place Order";
         }
-    )
-
-})
-
-
-/* =========================
-   LOAD CART
-========================= */
-
-async function loadCart() {
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/cart/${userId}`
-            )
-
-
-        const result =
-            await response.json()
-
-
-        cart =
-            result.data || []
-
-
-        calculateTotal()
-
-    } catch (error) {
-
-        console.log(error)
-
     }
-
-}
-
-
-/* =========================
-   CALCULATE TOTAL
-========================= */
-
-function calculateTotal() {
-
-    subtotal = 0
-
-    productDiscount = 0
-
-
-    cart.forEach(item => {
-
-        const price =
-            Number(item.price)
-
-        const quantity =
-            Number(item.quantity)
-
-        const discount =
-            Number(item.discount || 0)
-
-
-        subtotal +=
-            price * quantity
-
-
-        productDiscount +=
-            (
-                price *
-                quantity *
-                discount
-            ) / 100
-
-    })
-
-
-    updateSummary()
-
-}
-
-
-/* =========================
-   UPDATE SUMMARY
-========================= */
-
-function updateSummary() {
-
-    const finalAmount =
-        subtotal -
-        productDiscount
-
-
-    document.getElementById(
-        "subtotal"
-    ).textContent =
-        subtotal.toFixed(2)
-
-
-    document.getElementById(
-        "productDiscount"
-    ).textContent =
-        productDiscount.toFixed(2)
-
-
-    document.getElementById(
-        "finalAmount"
-    ).textContent =
-        finalAmount.toFixed(2)
-
-}
-
-
-/* =========================
-   SAVE ADDRESS + PLACE ORDER
-========================= */
-
-async function saveAddress() {
-
-    const phone =
-        document.getElementById(
-            "phone"
-        ).value.trim()
-
-
-    const address =
-        document.getElementById(
-            "address"
-        ).value.trim()
-
-
-    const city =
-        document.getElementById(
-            "city"
-        ).value.trim()
-
-
-    const state =
-        document.getElementById(
-            "state"
-        ).value.trim()
-
-
-    const pincode =
-        document.getElementById(
-            "pincode"
-        ).value.trim()
-
 
     /* =========================
-       CHECK ADDRESS
+       PAGE LOAD
     ========================= */
-
-    if (
-        !phone ||
-        !address ||
-        !city ||
-        !state ||
-        !pincode
-    ) {
-
-        alert(
-            "Please fill all address details"
-        )
-
-        return
-
-    }
-
-
-    /* =========================
-       CHECK PAYMENT
-    ========================= */
-
-    const selectedPayment =
-        document.querySelector(
-            'input[name="payment"]:checked'
-        )
-
-
-    if (!selectedPayment) {
-
-        alert(
-            "Please select a payment method"
-        )
-
-        return
-
-    }
-
-
-    const paymentMethod =
-        selectedPayment.value
-
-
-    const saveButton =
-        document.getElementById(
-            "saveAddressBtn"
-        )
-
-
-    saveButton.disabled = true
-
-    saveButton.textContent =
-        "Processing..."
-
-
-    try {
-
-
-        /* =========================
-           SAVE ADDRESS
-        ========================= */
-
-        const addressResponse =
-            await fetch(
-                `${API_URL}/order/address`,
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body: JSON.stringify({
-
-                        user_id:
-                            userId,
-
-                        phone:
-                            phone,
-
-                        address:
-                            address,
-
-                        city:
-                            city,
-
-                        state:
-                            state,
-
-                        pincode:
-                            pincode
-
-                    })
-
-                }
-            )
-
-
-        const addressResult =
-            await addressResponse.json()
-
-
-        if (
-            addressResult.status !==
-            "success"
-        ) {
-
-            alert(
-                addressResult.message ||
-                "Address save failed"
-            )
-
-            saveButton.disabled = false
-
-            saveButton.textContent =
-                "Save Address"
-
-            return
-
-        }
-
-
-        selectedAddressId =
-            addressResult.data.address_id
-
-
-        /* =========================
-           PLACE ORDER
-        ========================= */
-
-        const finalAmount =
-            subtotal -
-            productDiscount
-
-
-        const orderResponse =
-            await fetch(
-                `${API_URL}/order`,
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body: JSON.stringify({
-
-                        user_id:
-                            userId,
-
-                        address_id:
-                            selectedAddressId,
-
-                        total_amount:
-                            subtotal,
-
-                        discount_amount:
-                            productDiscount,
-
-                        final_amount:
-                            finalAmount,
-
-                        payment_method:
-                            paymentMethod
-
-                    })
-
-                }
-            )
-
-
-        const orderResult =
-            await orderResponse.json()
-
-
-        if (
-            orderResult.status ===
-            "success"
-        ) {
-
-
-            localStorage.setItem(
-                "order_id",
-                orderResult.data.order_id
-            )
-
-
-            window.location.href =
-                "order-success.html"
-
-
-        } else {
-
-            alert(
-                orderResult.message ||
-                "Order failed"
-            )
-
-            saveButton.disabled = false
-
-            saveButton.textContent =
-                "Save Address"
-
-        }
-
-
-    } catch (error) {
-
-        console.log(error)
-
-        alert(
-            "Order placement failed"
-        )
-
-        saveButton.disabled = false
-
-        saveButton.textContent =
-            "Save Address"
-
-    }
-
-}
-
-
-/* =========================
-   PAGE LOAD
-========================= */
-
-loadCart()
-
-
+    loadCart();
 </script>
-
 
 </body>
 
 </html>
-
-
-

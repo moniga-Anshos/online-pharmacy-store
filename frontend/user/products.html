@@ -501,688 +501,290 @@
     </footer>
 
     <script>
+    const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-       const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
+    let allProducts = [];
 
+    /* LOAD PRODUCTS */
+    async function loadProducts() {
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/product`);
+            const result = await response.json();
 
-        let allProducts = []
-
-
-        /* LOAD PRODUCTS */
-
-        async function loadProducts() {
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/product`
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (result.status !== "success") {
-
-                    throw new Error(
-                        "Failed to load products"
-                    )
-
-                }
-
-
-                allProducts =
-                    result.data || []
-
-
-                document.getElementById(
-                    "loading"
-                ).style.display = "none"
-
-
-                displayProducts(
-                    allProducts
-                )
-
-
-                loadCategories()
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-
-                document.getElementById(
-                    "loading"
-                ).innerHTML =
-                    "Unable to load products. Please start the backend server."
-
+            if (result.status !== "success") {
+                throw new Error("Failed to load products");
             }
 
+            allProducts = result.data || [];
+
+            document.getElementById("loading").style.display = "none";
+            displayProducts(allProducts);
+            loadCategories();
+        }
+        catch (error) {
+            console.log(error);
+            document.getElementById("loading").innerHTML = "Unable to load products. Please start the backend server.";
+        }
+    }
+
+    /* LOAD CATEGORIES */
+    async function loadCategories() {
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/admin/category`);
+            const result = await response.json();
+
+            if (result.status !== "success") {
+                return;
+            }
+
+            const categoryFilter = document.getElementById("categoryFilter");
+
+            categoryFilter.innerHTML = `
+                <option value="all">All Categories</option>
+            `;
+
+            result.data.forEach(category => {
+                const option = document.createElement("option");
+                option.value = category.category_name;
+                option.textContent = category.category_name;
+                categoryFilter.appendChild(option);
+            });
+
+            const selectedCategory = localStorage.getItem("selectedCategory");
+
+            if (selectedCategory) {
+                categoryFilter.value = selectedCategory;
+                filterProducts();
+                localStorage.removeItem("selectedCategory");
+            }
+        }
+        catch (error) {
+            console.log("Category loading error:", error);
+        }
+    }
+
+    /* DISPLAY PRODUCTS */
+    function displayProducts(products) {
+        const container = document.getElementById("productsContainer");
+        container.innerHTML = "";
+
+        if (products.length === 0) {
+            container.innerHTML = `
+                <div class="no-products">
+                    <h3>No products found</h3>
+                    <p>Try another search.</p>
+                </div>
+            `;
+            return;
         }
 
+        products.forEach(product => {
+            const price = Number(product.price);
+            const discount = Number(product.discount || 0);
+            const finalPrice = price - (price * discount / 100);
 
-        /* LOAD CATEGORIES */
+            let imageHTML = "";
 
-        async function loadCategories() {
+            if (product.image_url) {
+                let imageUrl = product.image_url;
 
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/admin/category`
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (result.status !== "success") {
-                    return
+                if (imageUrl.startsWith("/")) {
+                    imageUrl = API_URL + imageUrl;
                 }
 
-
-                const categoryFilter =
-                    document.getElementById(
-                        "categoryFilter"
-                    )
-
-
-                categoryFilter.innerHTML = `
-                    <option value="all">
-                        All Categories
-                    </option>
-                `
-
-
-                result.data.forEach(category => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        )
-
-
-                    option.value =
-                        category.category_name
-
-
-                    option.textContent =
-                        category.category_name
-
-
-                    categoryFilter.appendChild(
-                        option
-                    )
-
-                })
-
-
-                const selectedCategory =
-                    localStorage.getItem(
-                        "selectedCategory"
-                    )
-
-
-                if (selectedCategory) {
-
-                    categoryFilter.value =
-                        selectedCategory
-
-
-                    filterProducts()
-
-
-                    localStorage.removeItem(
-                        "selectedCategory"
-                    )
-
-                }
-
+                imageHTML = `
+                    <img src="${imageUrl}" alt="${product.product_name}" onerror="this.style.display='none'">
+                `;
             }
-            catch (error) {
-
-                console.log(
-                    "Category loading error:",
-                    error
-                )
-
+            else {
+                imageHTML = `
+                    <div class="no-image">💊</div>
+                `;
             }
 
-        }
+            const stockText = product.stock > 0 ? `Only ${product.stock} left` : "Out of stock";
+            const stockClass = product.stock > 0 ? "in-stock" : "out-stock";
 
+            const oldPriceHTML = discount > 0 ? `
+                <span class="old-price">₹${price.toFixed(2)}</span>
+            ` : "";
 
-        /* DISPLAY PRODUCTS */
+            const discountHTML = discount > 0 ? `
+                <div class="discount">${discount}% OFF</div>
+            ` : "";
 
-        function displayProducts(products) {
+            container.innerHTML += `
+                <div class="product-card">
+                    <button class="wishlist-btn" onclick="addWishlist(${product.product_id})">
+                        ❤️
+                    </button>
 
-            const container =
-                document.getElementById(
-                    "productsContainer"
-                )
+                    <div class="product-image" onclick="viewProduct(${product.product_id})">
+                        ${imageHTML}
+                    </div>
 
+                    <div class="product-info">
+                        <div class="category">
+                            ${product.category_name || "General"}
+                        </div>
 
-            container.innerHTML = ""
-
-
-            if (products.length === 0) {
-
-                container.innerHTML = `
-                    <div class="no-products">
-
-                        <h3>
-                            No products found
+                        <h3 onclick="viewProduct(${product.product_id})">
+                            ${product.product_name}
                         </h3>
 
-                        <p>
-                            Try another search.
+                        <p class="description">
+                            ${product.description || "Healthcare product"}
                         </p>
 
+                        <div class="price">
+                            ₹${finalPrice.toFixed(2)}
+                            ${oldPriceHTML}
+                        </div>
+
+                        ${discountHTML}
+
+                        <div class="stock ${stockClass}">
+                            ${stockText}
+                        </div>
+
+                        <div class="card-buttons">
+                            <button class="details-btn" onclick="viewProduct(${product.product_id})">
+                                View Details
+                            </button>
+
+                            <button class="cart-btn" onclick="addToCart(${product.product_id})" ${product.stock <= 0 ? "disabled" : ""}>
+                                🛒 Add
+                            </button>
+                        </div>
                     </div>
-                `
-
-                return
-
-            }
-
-
-            products.forEach(product => {
-
-                const price =
-                    Number(product.price)
-
-
-                const discount =
-                    Number(
-                        product.discount || 0
-                    )
-
-
-                const finalPrice =
-                    price -
-                    (price * discount / 100)
-
-
-                let imageHTML = ""
-
-
-                /*
-                    IMPORTANT:
-                    Backend stores image like:
-
-                    /uploads/image.jpg
-
-                    So we add:
-
-                    http://localhost:3000
-
-                    before the image path.
-                */
-
-                if (product.image_url) {
-
-                    let imageUrl =
-                        product.image_url
-
-
-                    if (
-                        imageUrl.startsWith("/")
-                    ) {
-
-                        imageUrl =
-                            API_URL +
-                            imageUrl
-
-                    }
-
-
-                    imageHTML = `
-                        <img
-                            src="${imageUrl}"
-                            alt="${product.product_name}"
-                            onerror="this.style.display='none'"
-                        >
-                    `
-
-                }
-                else {
-
-                    imageHTML = `
-                        <div class="no-image">
-                            💊
-                        </div>
-                    `
-
-                }
-
-
-                const stockText =
-                    product.stock > 0
-                        ? `Only ${product.stock} left`
-                        : "Out of stock"
-
-
-                const stockClass =
-                    product.stock > 0
-                        ? "in-stock"
-                        : "out-stock"
-
-
-                const oldPriceHTML =
-                    discount > 0
-                        ? `
-                            <span class="old-price">
-                                ₹${price.toFixed(2)}
-                            </span>
-                          `
-                        : ""
-
-
-                const discountHTML =
-                    discount > 0
-                        ? `
-                            <div class="discount">
-                                ${discount}% OFF
-                            </div>
-                          `
-                        : ""
-
-
-                container.innerHTML += `
-
-                    <div class="product-card">
-
-                        <button
-                            class="wishlist-btn"
-                            onclick="addWishlist(${product.product_id})"
-                        >
-                            ❤️
-                        </button>
-
-
-                        <div
-                            class="product-image"
-                            onclick="viewProduct(${product.product_id})"
-                        >
-
-                            ${imageHTML}
-
-                        </div>
-
-
-                        <div class="product-info">
-
-                            <div class="category">
-                                ${product.category_name || "General"}
-                            </div>
-
-
-                            <h3
-                                onclick="viewProduct(${product.product_id})"
-                            >
-                                ${product.product_name}
-                            </h3>
-
-
-                            <p class="description">
-
-                                ${
-                                    product.description ||
-                                    "Healthcare product"
-                                }
-
-                            </p>
-
-
-                            <div class="price">
-
-                                ₹${finalPrice.toFixed(2)}
-
-                                ${oldPriceHTML}
-
-                            </div>
-
-
-                            ${discountHTML}
-
-
-                            <div class="stock ${stockClass}">
-
-                                ${stockText}
-
-                            </div>
-
-
-                            <div class="card-buttons">
-
-                                <button
-                                    class="details-btn"
-                                    onclick="viewProduct(${product.product_id})"
-                                >
-                                    View Details
-                                </button>
-
-
-                                <button
-                                    class="cart-btn"
-                                    onclick="addToCart(${product.product_id})"
-                                    ${
-                                        product.stock <= 0
-                                            ? "disabled"
-                                            : ""
-                                    }
-                                >
-                                    🛒 Add
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                `
-
-            })
-
+                </div>
+            `;
+        });
+    }
+
+    /* SEARCH */
+    function searchProducts() {
+        const searchText = document.getElementById("searchInput").value.toLowerCase().trim();
+
+        const filteredProducts = allProducts.filter(product =>
+            product.product_name.toLowerCase().includes(searchText)
+        );
+
+        displayProducts(filteredProducts);
+    }
+
+    /* SEARCH USING ENTER */
+    document.getElementById("searchInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            searchProducts();
+        }
+    });
+
+    /* CATEGORY FILTER */
+    function filterProducts() {
+        const selectedCategory = document.getElementById("categoryFilter").value;
+
+        if (selectedCategory === "all") {
+            displayProducts(allProducts);
+            return;
         }
 
+        const filteredProducts = allProducts.filter(product =>
+            product.category_name === selectedCategory
+        );
 
-        /* SEARCH */
+        displayProducts(filteredProducts);
+    }
 
-        function searchProducts() {
+    /* VIEW PRODUCT */
+    function viewProduct(productId) {
+        localStorage.setItem("selectedProductId", productId);
+        window.location.href = "product-details.html";
+    }
 
-            const searchText =
-                document.getElementById(
-                    "searchInput"
-                ).value
-                .toLowerCase()
-                .trim()
+    /* ADD WISHLIST */
+    async function addWishlist(productId) {
+        const userId = localStorage.getItem("user_id");
 
-
-            const filteredProducts =
-                allProducts.filter(product =>
-
-                    product.product_name
-                        .toLowerCase()
-                        .includes(searchText)
-
-                )
-
-
-            displayProducts(
-                filteredProducts
-            )
-
+        if (!userId) {
+            alert("Please login to add products to wishlist.");
+            window.location.href = "login.html";
+            return;
         }
 
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/wishlist/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: Number(userId),
+                    product_id: productId
+                })
+            });
 
-        /* SEARCH USING ENTER */
+            const result = await response.json();
 
-        document
-            .getElementById("searchInput")
-            .addEventListener(
-                "keypress",
-                function(event) {
-
-                    if (event.key === "Enter") {
-
-                        searchProducts()
-
-                    }
-
-                }
-            )
-
-
-        /* CATEGORY FILTER */
-
-        function filterProducts() {
-
-            const selectedCategory =
-                document.getElementById(
-                    "categoryFilter"
-                ).value
-
-
-            if (selectedCategory === "all") {
-
-                displayProducts(
-                    allProducts
-                )
-
-                return
-
+            if (result.status === "success") {
+                alert("Product added to wishlist ❤️");
             }
+            else {
+                alert(result.message || "Failed to add wishlist");
+            }
+        }
+        catch (error) {
+            console.log(error);
+            alert("Something went wrong");
+        }
+    }
 
+    /* ADD TO CART */
+    async function addToCart(productId) {
+        const userId = localStorage.getItem("user_id");
 
-            const filteredProducts =
-                allProducts.filter(product =>
-
-                    product.category_name ===
-                    selectedCategory
-
-                )
-
-
-            displayProducts(
-                filteredProducts
-            )
-
+        if (!userId) {
+            alert("Please login to add products to cart.");
+            window.location.href = "login.html";
+            return;
         }
 
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/cart/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: Number(userId),
+                    product_id: productId,
+                    quantity: 1
+                })
+            });
 
-        /* VIEW PRODUCT */
+            const result = await response.json();
 
-        function viewProduct(productId) {
-
-            localStorage.setItem(
-                "selectedProductId",
-                productId
-            )
-
-
-            window.location.href =
-                "product-details.html"
-
+            if (result.status === "success") {
+                alert("Product added to cart successfully 🛒");
+                window.location.href = "cart.html";
+            }
+            else {
+                alert(result.message || "Failed to add product");
+            }
         }
-
-
-        /* ADD WISHLIST */
-
-        async function addWishlist(productId) {
-
-            const userId =
-                localStorage.getItem(
-                    "user_id"
-                )
-
-
-            if (!userId) {
-
-                alert(
-                    "Please login to add products to wishlist."
-                )
-
-
-                window.location.href =
-                    "login.html"
-
-
-                return
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/wishlist/add`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                user_id:
-                                    Number(userId),
-
-                                product_id:
-                                    productId
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status ===
-                    "success"
-                ) {
-
-                    alert(
-                        "Product added to wishlist ❤️"
-                    )
-
-                }
-                else {
-
-                    alert(
-                        result.message ||
-                        "Failed to add wishlist"
-                    )
-
-                }
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-
-                alert(
-                    "Something went wrong"
-                )
-
-            }
-
+        catch (error) {
+            console.log(error);
+            alert("Something went wrong");
         }
+    }
 
-
-        /* ADD TO CART */
-
-        async function addToCart(productId) {
-
-            const userId =
-                localStorage.getItem(
-                    "user_id"
-                )
-
-
-            if (!userId) {
-
-                alert(
-                    "Please login to add products to cart."
-                )
-
-
-                window.location.href =
-                    "login.html"
-
-
-                return
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/cart/add`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                user_id:
-                                    Number(userId),
-
-                                product_id:
-                                    productId,
-
-                                quantity: 1
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status ===
-                    "success"
-                ) {
-
-                    alert(
-                        "Product added to cart successfully 🛒"
-                    )
-
-                    window.location.href = "cart.html"
-
-                }
-                else {
-
-                    alert(
-                        result.message ||
-                        "Failed to add product"
-                    )
-
-                }
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-
-                alert(
-                    "Something went wrong"
-                )
-
-            }
-
-        }
-
-
-        /* START */
-
-        loadProducts()
-
-    </script>
+    /* START */
+    loadProducts();
+</script>
 
 </body>
 

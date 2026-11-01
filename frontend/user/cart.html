@@ -1,17 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Cart - MediCare Pharmacy</title>
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -299,801 +293,314 @@
         }
 
         @media (max-width: 900px) {
-
             .cart-layout {
                 grid-template-columns: 1fr;
             }
-
             .summary {
                 position: static;
             }
-
         }
 
         @media (max-width: 650px) {
-
             header {
                 flex-direction: column;
                 gap: 15px;
             }
-
             nav {
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
             .cart-card {
                 grid-template-columns: 90px 1fr;
             }
-
             .product-image {
                 width: 90px;
                 height: 90px;
             }
-
             .item-actions {
                 grid-column: 1 / -1;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
             }
-
             .item-total {
                 margin-bottom: 0;
             }
-
         }
-
-        @media (max-width: 450px) {
-
-            .page-title h1 {
-                font-size: 28px;
-            }
-
-            .cart-section {
-                padding-left: 4%;
-                padding-right: 4%;
-            }
-
-        }
-
     </style>
-
 </head>
-
 
 <body>
 
-
     <!-- HEADER -->
-
     <header>
-
-        <div class="logo">
-            MediCare Pharmacy
-        </div>
-
+        <div class="logo">MediCare Pharmacy</div>
         <nav>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="products.html">
-                Products
-            </a>
-
-            <a href="wishlist.html">
-                ❤️ Wishlist
-            </a>
-
-            <a href="cart.html">
-                🛒 Cart
-            </a>
-
-            <a href="profile.html">
-                Profile
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="wishlist.html">❤️ Wishlist</a>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="profile.html">Profile</a>
         </nav>
-
     </header>
 
-
     <!-- TITLE -->
-
     <section class="page-title">
-
-        <h1>
-            My Cart 🛒
-        </h1>
-
-        <p>
-            Review your products before checkout
-        </p>
-
+        <h1>My Cart 🛒</h1>
+        <p>Review your products before checkout</p>
     </section>
 
-
     <!-- LOADING -->
-
-    <div
-        id="loading"
-        class="loading"
-    >
+    <div id="loading" class="loading">
         Loading cart...
     </div>
 
-
     <!-- CART -->
-
     <section class="cart-section">
-
-        <div
-            id="cartLayout"
-            class="cart-layout"
-            style="display: none;"
-        >
-
-
+        <div id="cartLayout" class="cart-layout" style="display: none;">
             <!-- ITEMS -->
-
-            <div
-                id="cartItems"
-                class="cart-items"
-            ></div>
-
+            <div id="cartItems" class="cart-items"></div>
 
             <!-- SUMMARY -->
-
             <div class="summary">
-
-                <h2>
-                    Order Summary
-                </h2>
-
-
+                <h2>Order Summary</h2>
                 <div class="summary-row">
-
-                    <span>
-                        Subtotal
-                    </span>
-
-                    <span id="subtotal">
-                        ₹0.00
-                    </span>
-
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0.00</span>
                 </div>
-
-
                 <div class="summary-row discount-row">
-
-                    <span>
-                        Discount
-                    </span>
-
-                    <span id="discount">
-                        - ₹0.00
-                    </span>
-
+                    <span>Discount</span>
+                    <span id="discount">- ₹0.00</span>
                 </div>
-
-
                 <div class="summary-total">
-
-                    <span>
-                        Total
-                    </span>
-
-                    <span id="finalTotal">
-                        ₹0.00
-                    </span>
-
+                    <span>Total</span>
+                    <span id="finalTotal">₹0.00</span>
                 </div>
-
-
-                <button
-                    class="checkout-btn"
-                    onclick="goToCheckout()"
-                >
+                <button class="checkout-btn" onclick="goToCheckout()">
                     Proceed to Checkout
                 </button>
-
-
-                <a
-                    href="products.html"
-                    class="continue-btn"
-                >
+                <a href="products.html" class="continue-btn">
                     ← Continue Shopping
                 </a>
-
             </div>
-
         </div>
-
 
         <!-- EMPTY CART -->
-
-        <div
-            id="emptyCart"
-            class="empty-cart"
-        >
-
-            <div class="icon">
-                🛒
-            </div>
-
-            <h2>
-                Your Cart is Empty
-            </h2>
-
-            <p>
-                Add some products to your cart and shop with us.
-            </p>
-
-            <a
-                href="products.html"
-                class="shop-btn"
-            >
-                Browse Products
-            </a>
-
+        <div id="emptyCart" class="empty-cart">
+            <div class="icon">🛒</div>
+            <h2>Your Cart is Empty</h2>
+            <p>Add some products to your cart and shop with us.</p>
+            <a href="products.html" class="shop-btn">Browse Products</a>
         </div>
 
-
         <!-- ERROR -->
-
-        <div
-            id="error"
-            class="error"
-            style="display: none;"
-        ></div>
-
+        <div id="error" class="error" style="display: none;"></div>
     </section>
 
-
     <!-- FOOTER -->
-
     <footer>
-
-        <p>
-            © 2026 MediCare Pharmacy. All Rights Reserved.
-        </p>
-
+        <p>© 2026 MediCare Pharmacy. All Rights Reserved.</p>
     </footer>
 
-
     <script>
-
         const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-        const userId =
-            localStorage.getItem("user_id")
-
+        const userId = localStorage.getItem("user_id");
 
         /* CHECK LOGIN */
-
         if (!userId) {
-
-            alert(
-                "Please login to view your cart."
-            )
-
-            window.location.href =
-                "login.html"
-
+            alert("Please login to view your cart.");
+            window.location.href = "login.html";
         }
-
 
         /* LOAD CART */
-
         async function loadCart() {
-
             try {
+                // FIXED: Added /api prefix to match server.js routes
+                const response = await fetch(`${API_URL}/api/cart/${userId}`);
+                const result = await response.json();
 
-                const response =
-                    await fetch(
-                        `${API_URL}/cart/${userId}`
-                    )
+                document.getElementById("loading").style.display = "none";
 
-
-                const result =
-                    await response.json()
-
-
-                document.getElementById(
-                    "loading"
-                ).style.display = "none"
-
-
-                if (
-                    result.status !== "success"
-                ) {
-
-                    throw new Error(
-                        "Failed to load cart"
-                    )
-
+                if (result.status !== "success") {
+                    throw new Error("Failed to load cart");
                 }
 
-
-                const cart =
-                    result.data || []
-
+                const cart = result.data || [];
 
                 if (cart.length === 0) {
-
-                    document.getElementById(
-                        "emptyCart"
-                    ).style.display = "block"
-
-                    return
-
+                    document.getElementById("emptyCart").style.display = "block";
+                    return;
                 }
 
-
-                document.getElementById(
-                    "cartLayout"
-                ).style.display = "grid"
-
-
-                displayCart(cart)
+                document.getElementById("cartLayout").style.display = "grid";
+                displayCart(cart);
 
             } catch (error) {
-
-                console.log(error)
-
-                document.getElementById(
-                    "loading"
-                ).style.display = "none"
-
-
-                document.getElementById(
-                    "error"
-                ).style.display = "block"
-
-
-                document.getElementById(
-                    "error"
-                ).textContent =
-                    "Unable to load cart."
-
+                console.log(error);
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("error").style.display = "block";
+                document.getElementById("error").textContent = "Unable to load cart.";
             }
-
         }
-
 
         /* DISPLAY CART */
-
         function displayCart(cart) {
+            const container = document.getElementById("cartItems");
+            container.innerHTML = "";
 
-            const container =
-                document.getElementById(
-                    "cartItems"
-                )
-
-
-            container.innerHTML = ""
-
-
-            let subtotal = 0
-
-            let discountAmount = 0
-
+            let subtotal = 0;
+            let discountAmount = 0;
 
             cart.forEach(item => {
+                const price = Number(item.price);
+                const quantity = Number(item.quantity);
+                const discount = Number(item.discount || 0);
 
-                const price =
-                    Number(item.price)
+                const itemSubtotal = price * quantity;
+                const itemDiscount = itemSubtotal * discount / 100;
+                const itemFinal = itemSubtotal - itemDiscount;
 
+                subtotal += itemSubtotal;
+                discountAmount += itemDiscount;
 
-                const quantity =
-                    Number(item.quantity)
-
-
-                const discount =
-                    Number(item.discount || 0)
-
-
-                const itemSubtotal =
-                    price * quantity
-
-
-                const itemDiscount =
-                    itemSubtotal *
-                    discount / 100
-
-
-                const itemFinal =
-                    itemSubtotal -
-                    itemDiscount
-
-
-                subtotal += itemSubtotal
-
-                discountAmount += itemDiscount
-
-
-                /*
-
-                    IMAGE URL FIX
-
-                    Database:
-                    /uploads/image.jpg
-
-                    Backend:
-                    http://localhost:3000/uploads/image.jpg
-
-                */
-
-                let imageHTML = ""
-
+                let imageHTML = "";
 
                 if (item.image_url) {
-
-                    let imageUrl =
-                        item.image_url
-
-
-                    if (
-                        imageUrl.startsWith("/")
-                    ) {
-
-                        imageUrl =
-                            API_URL +
-                            imageUrl
-
+                    let imageUrl = item.image_url;
+                    if (imageUrl.startsWith("/")) {
+                        imageUrl = API_URL + imageUrl;
                     }
-
-
                     imageHTML = `
-
-                        <img
-                            src="${imageUrl}"
-                            alt="${item.product_name}"
-                            onerror="showImageError(this)"
-                        >
-
-                    `
-
+                        <img src="${imageUrl}" alt="${item.product_name}" onerror="showImageError(this)">
+                    `;
                 } else {
-
                     imageHTML = `
-
-                        <div class="no-image">
-                            💊
-                        </div>
-
-                    `
-
+                        <div class="no-image">💊</div>
+                    `;
                 }
-
 
                 container.innerHTML += `
-
                     <div class="cart-card">
-
-
                         <div class="product-image">
-
                             ${imageHTML}
-
                         </div>
-
-
                         <div class="product-info">
-
-                            <h3>
-                                ${item.product_name}
-                            </h3>
-
-
-                            <div class="product-price">
-
-                                ₹${price.toFixed(2)}
-
-                            </div>
-
-
+                            <h3>${item.product_name}</h3>
+                            <div class="product-price">₹${price.toFixed(2)}</div>
                             <div class="quantity-box">
-
-
-                                <button
-                                    onclick="changeQuantity(
-                                        ${item.cart_item_id},
-                                        ${quantity - 1}
-                                    )"
-                                >
-                                    −
-                                </button>
-
-
-                                <span class="quantity">
-
-                                    ${quantity}
-
-                                </span>
-
-
-                                <button
-                                    onclick="changeQuantity(
-                                        ${item.cart_item_id},
-                                        ${quantity + 1}
-                                    )"
-                                >
-                                    +
-                                </button>
-
-
+                                <button onclick="changeQuantity(${item.cart_item_id}, ${quantity - 1})">−</button>
+                                <span class="quantity">${quantity}</span>
+                                <button onclick="changeQuantity(${item.cart_item_id}, ${quantity + 1})">+</button>
                             </div>
-
                         </div>
-
-
                         <div class="item-actions">
-
-
-                            <div class="item-total">
-
-                                ₹${itemFinal.toFixed(2)}
-
-                            </div>
-
-
-                            <button
-                                class="remove-btn"
-                                onclick="removeItem(
-                                    ${item.cart_item_id}
-                                )"
-                            >
-                                Remove
-                            </button>
-
-
+                            <div class="item-total">₹${itemFinal.toFixed(2)}</div>
+                            <button class="remove-btn" onclick="removeItem(${item.cart_item_id})">Remove</button>
                         </div>
-
-
                     </div>
+                `;
+            });
 
-                `
+            const finalTotal = subtotal - discountAmount;
 
-            })
-
-
-            const finalTotal =
-                subtotal -
-                discountAmount
-
-
-            document.getElementById(
-                "subtotal"
-            ).textContent =
-                `₹${subtotal.toFixed(2)}`
-
-
-            document.getElementById(
-                "discount"
-            ).textContent =
-                `- ₹${discountAmount.toFixed(2)}`
-
-
-            document.getElementById(
-                "finalTotal"
-            ).textContent =
-                `₹${finalTotal.toFixed(2)}`
-
+            document.getElementById("subtotal").textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById("discount").textContent = `- ₹${discountAmount.toFixed(2)}`;
+            document.getElementById("finalTotal").textContent = `₹${finalTotal.toFixed(2)}`;
 
             /* SAVE TOTAL FOR CHECKOUT */
-
-            localStorage.setItem(
-                "cart_total",
-                finalTotal.toFixed(2)
-            )
-
+            localStorage.setItem("cart_total", finalTotal.toFixed(2));
         }
-
 
         /* IMAGE ERROR */
-
         function showImageError(image) {
-
-            image.style.display = "none"
-
+            image.style.display = "none";
             image.parentElement.innerHTML = `
-
-                <div class="no-image">
-                    💊
-                </div>
-
-            `
-
+                <div class="no-image">💊</div>
+            `;
         }
-
 
         /* CHANGE QUANTITY */
-
-        async function changeQuantity(
-            cartItemId,
-            quantity
-        ) {
-
+        async function changeQuantity(cartItemId, quantity) {
             if (quantity < 1) {
-
-                removeItem(cartItemId)
-
-                return
-
+                removeItem(cartItemId);
+                return;
             }
-
 
             try {
+                // FIXED: Added /api prefix to match server.js routes
+                const response = await fetch(`${API_URL}/api/cart/update`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        cart_item_id: cartItemId,
+                        quantity: quantity
+                    })
+                });
 
-                const response =
-                    await fetch(
-                        `${API_URL}/cart/update`,
-                        {
-                            method: "PUT",
+                const result = await response.json();
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                cart_item_id:
-                                    cartItemId,
-
-                                quantity:
-                                    quantity
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status === "success"
-                ) {
-
-                    loadCart()
-
+                if (result.status === "success") {
+                    loadCart();
                 } else {
-
-                    alert(
-                        result.message ||
-                        "Failed to update quantity"
-                    )
-
+                    alert(result.message || "Failed to update quantity");
                 }
-
             } catch (error) {
-
-                console.log(error)
-
-                alert(
-                    "Something went wrong."
-                )
-
+                console.log(error);
+                alert("Something went wrong.");
             }
-
         }
-
 
         /* REMOVE ITEM */
-
         async function removeItem(cartItemId) {
-
-            const confirmRemove =
-                confirm(
-                    "Remove this product from cart?"
-                )
-
-
+            const confirmRemove = confirm("Remove this product from cart?");
             if (!confirmRemove) {
-                return
+                return;
             }
-
 
             try {
+                // FIXED: Added /api prefix to match server.js routes
+                const response = await fetch(`${API_URL}/api/cart/remove`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        cart_item_id: cartItemId
+                    })
+                });
 
-                const response =
-                    await fetch(
-                        `${API_URL}/cart/remove`,
-                        {
-                            method: "DELETE",
+                const result = await response.json();
 
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                cart_item_id:
-                                    cartItemId
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status === "success"
-                ) {
-
-                    loadCart()
-
+                if (result.status === "success") {
+                    loadCart();
                 } else {
-
-                    alert(
-                        result.message ||
-                        "Failed to remove item"
-                    )
-
+                    alert(result.message || "Failed to remove item");
                 }
-
             } catch (error) {
-
-                console.log(error)
-
-                alert(
-                    "Something went wrong."
-                )
-
+                console.log(error);
+                alert("Something went wrong.");
             }
-
         }
-
 
         /* CHECKOUT */
-
         function goToCheckout() {
+            const total = localStorage.getItem("cart_total");
 
-            const total =
-                localStorage.getItem(
-                    "cart_total"
-                )
-
-
-            if (
-                !total ||
-                Number(total) <= 0
-            ) {
-
-                alert(
-                    "Your cart is empty."
-                )
-
-                return
-
+            if (!total || Number(total) <= 0) {
+                alert("Your cart is empty.");
+                return;
             }
 
-
-            window.location.href =
-                "checkout.html"
-
+            window.location.href = "checkout.html";
         }
 
-
         /* START */
-
-        loadCart()
-
+        loadCart();
     </script>
-
 
 </body>
 
 </html>
-

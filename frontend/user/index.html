@@ -2,15 +2,11 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Online Pharmacy Store</title>
+    <title>Online Pharmacy Store - MediCare Pharmacy</title>
     <meta name="google-site-verification" content="1GdUkEuIx6WlHwCk_-6OS5v45n6iEgc0nKol_NfpLd4" />
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -66,6 +62,10 @@
             color: white !important;
             padding: 10px 18px;
             border-radius: 6px;
+        }
+
+        .login-btn:hover {
+            background: #116d4f;
         }
 
         /* HERO */
@@ -238,6 +238,10 @@
             font-weight: bold;
         }
 
+        .cta-btn:hover {
+            background: #f0f0f0;
+        }
+
         /* FOOTER */
 
         footer {
@@ -264,6 +268,10 @@
             text-decoration: none;
         }
 
+        .footer-column a:hover {
+            color: white;
+        }
+
         .copyright {
             text-align: center;
             margin-top: 30px;
@@ -276,7 +284,6 @@
         /* MOBILE */
 
         @media (max-width: 900px) {
-
             header {
                 flex-direction: column;
                 gap: 15px;
@@ -297,7 +304,7 @@
             }
 
             .feature-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fres;
             }
 
             .footer-container {
@@ -306,7 +313,6 @@
         }
 
         @media (max-width: 600px) {
-
             .hero {
                 min-height: 450px;
                 padding: 40px 6%;
@@ -332,378 +338,162 @@
             .cta h2 {
                 font-size: 25px;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
     <!-- HEADER -->
-
     <header>
-
         <div class="logo">
             MediCare Pharmacy
         </div>
 
         <nav>
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="products.html">
-                Products
-            </a>
-
-            <a href="wishlist.html">
-                ❤️ Wishlist
-            </a>
-
-            <a href="cart.html">
-                🛒 Cart
-            </a>
-
-            <a href="profile.html">
-                Profile
-            </a>
-
-            <a href="login.html" class="login-btn">
-                Login
-            </a>
-
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="wishlist.html">❤️ Wishlist</a>
+            <a href="cart.html">🛒 Cart</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html" class="login-btn" id="authBtn">Login</a>
         </nav>
-
     </header>
 
-
     <!-- HERO -->
-
     <section class="hero">
-
         <div class="hero-content">
-
             <h1>
                 Your Health,
                 <span>Our Priority</span>
             </h1>
-
             <p>
-                Shop healthcare, wellness and personal care
-                products from the comfort of your home.
+                Shop healthcare, wellness and personal care products from the comfort of your home.
             </p>
-
             <a href="products.html" class="shop-btn">
                 Shop Now
             </a>
-
         </div>
-
     </section>
-
 
     <!-- FEATURES -->
-
     <section class="features">
-
         <div class="feature-container">
-
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    🚚
-                </div>
-
-                <h3>
-                    Fast Delivery
-                </h3>
-
-                <p>
-                    Get your products delivered safely
-                    to your doorstep.
-                </p>
-
+                <div class="feature-icon">🚚</div>
+                <h3>Fast Delivery</h3>
+                <p>Get your products delivered safely to your doorstep.</p>
             </div>
 
-
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    🔒
-                </div>
-
-                <h3>
-                    Secure Shopping
-                </h3>
-
-                <p>
-                    Your account and shopping information
-                    are handled securely.
-                </p>
-
+                <div class="feature-icon">🔒</div>
+                <h3>Secure Shopping</h3>
+                <p>Your account and shopping information are handled securely.</p>
             </div>
 
-
             <div class="feature-card">
-
-                <div class="feature-icon">
-                    💊
-                </div>
-
-                <h3>
-                    Quality Products
-                </h3>
-
-                <p>
-                    Browse our healthcare and wellness
-                    product collection.
-                </p>
-
+                <div class="feature-icon">💊</div>
+                <h3>Quality Products</h3>
+                <p>Browse our healthcare and wellness product collection.</p>
             </div>
-
         </div>
-
     </section>
-
 
     <!-- CATEGORIES -->
-
     <section class="categories">
-
         <div class="section-title">
-
-            <h2>
-                Shop by Category
-            </h2>
-
-            <p>
-                Find products easily from different categories
-            </p>
-
+            <h2>Shop by Category</h2>
+            <p>Find products easily from different categories</p>
         </div>
-
 
         <div class="category-container">
-
-
-            <div class="category-card"
-                 onclick="openCategory('Vitamins')">
-
-                <div class="category-icon">
-                    💊
-                </div>
-
-                <h3>
-                    Vitamins
-                </h3>
-
-                <p>
-                    Vitamins and wellness products
-                </p>
-
+            <div class="category-card" onclick="openCategory('Vitamins')">
+                <div class="category-icon">💊</div>
+                <h3>Vitamins</h3>
+                <p>Vitamins and wellness products</p>
             </div>
 
-
-            <div class="category-card"
-                 onclick="openCategory('Personal Care')">
-
-                <div class="category-icon">
-                    🧴
-                </div>
-
-                <h3>
-                    Personal Care
-                </h3>
-
-                <p>
-                    Personal care essentials
-                </p>
-
+            <div class="category-card" onclick="openCategory('Personal Care')">
+                <div class="category-icon">🧴</div>
+                <h3>Personal Care</h3>
+                <p>Personal care essentials</p>
             </div>
 
-
-            <div class="category-card"
-                 onclick="openCategory('Health Care')">
-
-                <div class="category-icon">
-                    🩺
-                </div>
-
-                <h3>
-                    Health Care
-                </h3>
-
-                <p>
-                    Healthcare essentials
-                </p>
-
+            <div class="category-card" onclick="openCategory('Health Care')">
+                <div class="category-icon">🩺</div>
+                <h3>Health Care</h3>
+                <p>Healthcare essentials</p>
             </div>
 
-
-            <div class="category-card"
-                 onclick="openCategory('Baby Care')">
-
-                <div class="category-icon">
-                    👶
-                </div>
-
-                <h3>
-                    Baby Care
-                </h3>
-
-                <p>
-                    Baby care essentials
-                </p>
-
+            <div class="category-card" onclick="openCategory('Baby Care')">
+                <div class="category-icon">👶</div>
+                <h3>Baby Care</h3>
+                <p>Baby care essentials</p>
             </div>
-
-
         </div>
-
     </section>
-
 
     <!-- CALL TO ACTION -->
-
     <section class="cta">
-
-        <h2>
-            Take Care of Your Health
-        </h2>
-
-        <p>
-            Explore our products and find what you need today.
-        </p>
-
-        <a href="products.html" class="cta-btn">
-            Explore Products
-        </a>
-
+        <h2>Take Care of Your Health</h2>
+        <p>Explore our products and find what you need today.</p>
+        <a href="products.html" class="cta-btn">Explore Products</a>
     </section>
 
-
     <!-- FOOTER -->
-
     <footer>
-
         <div class="footer-container">
-
-
             <div class="footer-column">
-
-                <h3>
-                    MediCare Pharmacy
-                </h3>
-
-                <p>
-                    Your trusted online destination for
-                    healthcare and wellness products.
-                </p>
-
+                <h3>MediCare Pharmacy</h3>
+                <p>Your trusted online destination for healthcare and wellness products.</p>
             </div>
 
-
             <div class="footer-column">
-
-                <h3>
-                    Quick Links
-                </h3>
-
-                <p>
-                    <a href="index.html">
-                        Home
-                    </a>
-                </p>
-
-                <p>
-                    <a href="products.html">
-                        Products
-                    </a>
-                </p>
-
-                <p>
-                    <a href="wishlist.html">
-                        Wishlist
-                    </a>
-                </p>
-
-                <p>
-                    <a href="cart.html">
-                        Cart
-                    </a>
-                </p>
-
+                <h3>Quick Links</h3>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="products.html">Products</a></p>
+                <p><a href="wishlist.html">Wishlist</a></p>
+                <p><a href="cart.html">Cart</a></p>
             </div>
 
-
             <div class="footer-column">
-
-                <h3>
-                    Account
-                </h3>
-
-                <p>
-                    <a href="login.html">
-                        Login
-                    </a>
-                </p>
-
-                <p>
-                    <a href="register.html">
-                        Register
-                    </a>
-                </p>
-
-                <p>
-                    <a href="profile.html">
-                        My Profile
-                    </a>
-                </p>
-
-                <p>
-                    <a href="orders.html">
-                        My Orders
-                    </a>
-                </p>
-
+                <h3>Account</h3>
+                <p><a href="login.html">Login</a></p>
+                <p><a href="register.html">Register</a></p>
+                <p><a href="profile.html">My Profile</a></p>
+                <p><a href="orders.html">My Orders</a></p>
             </div>
-
-
         </div>
-
 
         <div class="copyright">
-
             © 2026 MediCare Pharmacy. All Rights Reserved.
-
         </div>
-
     </footer>
 
-
     <!-- JAVASCRIPT -->
-
     <script>
+        /* CHECK LOGIN STATUS FOR HEADER BUTTON */
+        const userId = localStorage.getItem("user_id");
+        const authBtn = document.getElementById("authBtn");
 
-        function openCategory(category) {
-
-            localStorage.setItem(
-                "selectedCategory",
-                category
-            )
-
-            window.location.href =
-                "products.html"
-
+        if (userId) {
+            authBtn.textContent = "Logout";
+            authBtn.href = "#";
+            authBtn.style.background = "#d63031"; // Red color for logout
+            authBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("user_email");
+                alert("Logged out successfully!");
+                window.location.href = "login.html";
+            });
         }
 
+        function openCategory(category) {
+            localStorage.setItem("selectedCategory", category);
+            window.location.href = "products.html";
+        }
     </script>
-
 
 </body>
 

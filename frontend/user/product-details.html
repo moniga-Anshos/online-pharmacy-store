@@ -519,590 +519,227 @@
     </footer>
 
 
-    <script>
+   <script>
+    const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-        const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
+    const productId = localStorage.getItem("selectedProductId");
+    let product = null;
 
-
-        const productId =
-            localStorage.getItem(
-                "selectedProductId"
-            )
-
-
-        let product = null
-
-
-        /* LOAD PRODUCT */
-
-        async function loadProduct() {
-
-            if (!productId) {
-
-                showError(
-                    "Product not selected."
-                )
-
-                return
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/product/${productId}`
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status !== "success" ||
-                    !result.data
-                ) {
-
-                    throw new Error(
-                        "Product not found"
-                    )
-
-                }
-
-
-                product =
-                    result.data
-
-
-                displayProduct(product)
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-                showError(
-                    "Unable to load product details."
-                )
-
-            }
-
+    /* LOAD PRODUCT */
+    async function loadProduct() {
+        if (!productId) {
+            showError("Product not selected.");
+            return;
         }
 
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/product/${productId}`);
+            const result = await response.json();
 
-        /* DISPLAY PRODUCT */
-
-        function displayProduct(product) {
-
-            document.getElementById(
-                "loading"
-            ).style.display = "none"
-
-
-            document.getElementById(
-                "productDetails"
-            ).style.display = "grid"
-
-
-            document.getElementById(
-                "category"
-            ).textContent =
-                product.category_name ||
-                "General"
-
-
-            document.getElementById(
-                "productName"
-            ).textContent =
-                product.product_name
-
-
-            document.getElementById(
-                "description"
-            ).textContent =
-                product.description ||
-                "Healthcare product"
-
-
-            const price =
-                Number(product.price)
-
-
-            const discount =
-                Number(
-                    product.discount || 0
-                )
-
-
-            const finalPrice =
-                price -
-                (price * discount / 100)
-
-
-            document.getElementById(
-                "price"
-            ).textContent =
-                `₹${finalPrice.toFixed(2)}`
-
-
-            if (discount > 0) {
-
-                document.getElementById(
-                    "oldPrice"
-                ).textContent =
-                    `₹${price.toFixed(2)}`
-
-
-                document.getElementById(
-                    "discount"
-                ).textContent =
-                    `${discount}% OFF`
-
-            }
-            else {
-
-                document.getElementById(
-                    "oldPrice"
-                ).textContent = ""
-
-
-                document.getElementById(
-                    "discount"
-                ).textContent = ""
-
+            if (result.status !== "success" || !result.data) {
+                throw new Error("Product not found");
             }
 
+            product = result.data;
+            displayProduct(product);
+        } catch (error) {
+            console.log(error);
+            showError("Unable to load product details.");
+        }
+    }
 
-            /* STOCK */
+    /* DISPLAY PRODUCT */
+    function displayProduct(product) {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("productDetails").style.display = "grid";
 
-            const stockElement =
-                document.getElementById(
-                    "stock"
-                )
+        document.getElementById("category").textContent = product.category_name || "General";
+        document.getElementById("productName").textContent = product.product_name;
+        document.getElementById("description").textContent = product.description || "Healthcare product";
 
+        const price = Number(product.price);
+        const discount = Number(product.discount || 0);
+        const finalPrice = price - (price * discount / 100);
 
-            if (product.stock > 0) {
+        document.getElementById("price").textContent = `₹${finalPrice.toFixed(2)}`;
 
-                stockElement.textContent =
-                    `✓ In stock (${product.stock} available)`
-
-
-                stockElement.className =
-                    "stock in-stock"
-
-            }
-            else {
-
-                stockElement.textContent =
-                    "✕ Out of stock"
-
-
-                stockElement.className =
-                    "stock out-stock"
-
-
-                document.getElementById(
-                    "cartButton"
-                ).disabled = true
-
-            }
-
-
-            /*
-                IMAGE PATH FIX
-
-                Database:
-
-                /uploads/image.jpg
-
-                Converted to:
-
-                http://localhost:3000/uploads/image.jpg
-            */
-
-            const imageContainer =
-                document.getElementById(
-                    "productImage"
-                )
-
-
-            if (product.image_url) {
-
-                let imageUrl =
-                    product.image_url
-
-
-                if (
-                    imageUrl.startsWith("/")
-                ) {
-
-                    imageUrl =
-                        API_URL +
-                        imageUrl
-
-                }
-
-
-                imageContainer.innerHTML = `
-
-                    <img
-                        src="${imageUrl}"
-                        alt="${product.product_name}"
-                        onerror="showImageError()"
-                    >
-
-                `
-
-            }
-            else {
-
-                imageContainer.innerHTML = `
-
-                    <div class="no-image">
-                        💊
-                    </div>
-
-                `
-
-            }
-
+        if (discount > 0) {
+            document.getElementById("oldPrice").textContent = `₹${price.toFixed(2)}`;
+            document.getElementById("discount").textContent = `${discount}% OFF`;
+        } else {
+            document.getElementById("oldPrice").textContent = "";
+            document.getElementById("discount").textContent = "";
         }
 
+        /* STOCK */
+        const stockElement = document.getElementById("stock");
 
-        /* IMAGE ERROR */
-
-        function showImageError() {
-
-            document.getElementById(
-                "productImage"
-            ).innerHTML = `
-
-                <div class="no-image">
-                    💊
-                </div>
-
-            `
-
+        if (product.stock > 0) {
+            stockElement.textContent = `✓ In stock (${product.stock} available)`;
+            stockElement.className = "stock in-stock";
+        } else {
+            stockElement.textContent = "✕ Out of stock";
+            stockElement.className = "stock out-stock";
+            document.getElementById("cartButton").disabled = true;
         }
 
+        const imageContainer = document.getElementById("productImage");
 
-        /* INCREASE */
+        if (product.image_url) {
+            let imageUrl = product.image_url;
 
-        function increaseQuantity() {
-
-            if (!product) {
-                return
+            if (imageUrl.startsWith("/")) {
+                imageUrl = API_URL + imageUrl;
             }
 
+            imageContainer.innerHTML = `
+                <img src="${imageUrl}" alt="${product.product_name}" onerror="showImageError()">
+            `;
+        } else {
+            imageContainer.innerHTML = `
+                <div class="no-image">💊</div>
+            `;
+        }
+    }
 
-            const input =
-                document.getElementById(
-                    "quantity"
-                )
+    /* IMAGE ERROR */
+    function showImageError() {
+        document.getElementById("productImage").innerHTML = `
+            <div class="no-image">💊</div>
+        `;
+    }
 
-
-            let quantity =
-                Number(input.value)
-
-
-            if (
-                quantity < product.stock
-            ) {
-
-                quantity++
-
-            }
-
-
-            input.value =
-                quantity
-
+    /* INCREASE */
+    function increaseQuantity() {
+        if (!product) {
+            return;
         }
 
+        const input = document.getElementById("quantity");
+        let quantity = Number(input.value);
 
-        /* DECREASE */
-
-        function decreaseQuantity() {
-
-            const input =
-                document.getElementById(
-                    "quantity"
-                )
-
-
-            let quantity =
-                Number(input.value)
-
-
-            if (quantity > 1) {
-
-                quantity--
-
-            }
-
-
-            input.value =
-                quantity
-
+        if (quantity < product.stock) {
+            quantity++;
         }
 
+        input.value = quantity;
+    }
 
-        /* ADD TO CART */
+    /* DECREASE */
+    function decreaseQuantity() {
+        const input = document.getElementById("quantity");
+        let quantity = Number(input.value);
 
-        async function addToCart() {
-
-            const userId =
-                localStorage.getItem(
-                    "user_id"
-                )
-
-
-            if (!userId) {
-
-                alert(
-                    "Please login to add products to cart."
-                )
-
-
-                window.location.href =
-                    "login.html"
-
-
-                return
-
-            }
-
-
-            const quantity =
-                Number(
-                    document.getElementById(
-                        "quantity"
-                    ).value
-                )
-
-
-            if (quantity < 1) {
-
-                alert(
-                    "Please select a valid quantity."
-                )
-
-                return
-
-            }
-
-
-            if (quantity > product.stock) {
-
-                alert(
-                    "Requested quantity is not available."
-                )
-
-                return
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/cart/add`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                user_id:
-                                    Number(userId),
-
-                                product_id:
-                                    product.product_id,
-
-                                quantity:
-                                    quantity
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status ===
-                    "success"
-                ) {
-
-                    alert(
-                        "Product added to cart 🛒"
-                    )
-
-                }
-                else {
-
-                    alert(
-                        result.message ||
-                        "Failed to add product"
-                    )
-
-                }
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-                alert(
-                    "Something went wrong."
-                )
-
-            }
-
+        if (quantity > 1) {
+            quantity--;
         }
 
+        input.value = quantity;
+    }
 
-        /* ADD TO WISHLIST */
+    /* ADD TO CART */
+    async function addToCart() {
+        const userId = localStorage.getItem("user_id");
 
-        async function addToWishlist() {
-
-            const userId =
-                localStorage.getItem(
-                    "user_id"
-                )
-
-
-            if (!userId) {
-
-                alert(
-                    "Please login to add products to wishlist."
-                )
-
-
-                window.location.href =
-                    "login.html"
-
-
-                return
-
-            }
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        `${API_URL}/wishlist/add`,
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body: JSON.stringify({
-
-                                user_id:
-                                    Number(userId),
-
-                                product_id:
-                                    product.product_id
-
-                            })
-
-                        }
-                    )
-
-
-                const result =
-                    await response.json()
-
-
-                if (
-                    result.status ===
-                    "success"
-                ) {
-
-                    alert(
-                        "Product added to wishlist ❤️"
-                    )
-
-                }
-                else {
-
-                    alert(
-                        result.message ||
-                        "Failed to add wishlist"
-                    )
-
-                }
-
-            }
-            catch (error) {
-
-                console.log(error)
-
-                alert(
-                    "Something went wrong."
-                )
-
-            }
-
+        if (!userId) {
+            alert("Please login to add products to cart.");
+            window.location.href = "login.html";
+            return;
         }
 
+        const quantity = Number(document.getElementById("quantity").value);
 
-        /* ERROR */
-
-        function showError(message) {
-
-            document.getElementById(
-                "loading"
-            ).style.display = "none"
-
-
-            const errorElement =
-                document.getElementById(
-                    "error"
-                )
-
-
-            errorElement.style.display =
-                "block"
-
-
-            errorElement.innerHTML = `
-
-                <h2>
-                    ${message}
-                </h2>
-
-                <br>
-
-                <a href="products.html">
-                    Back to Products
-                </a>
-
-            `
-
+        if (quantity < 1) {
+            alert("Please select a valid quantity.");
+            return;
         }
 
+        if (quantity > product.stock) {
+            alert("Requested quantity is not available.");
+            return;
+        }
 
-        /* START */
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/cart/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: Number(userId),
+                    product_id: product.product_id,
+                    quantity: quantity
+                })
+            });
 
-        loadProduct()
+            const result = await response.json();
 
-    </script>
+            if (result.status === "success") {
+                alert("Product added to cart 🛒");
+            } else {
+                alert(result.message || "Failed to add product");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong.");
+        }
+    }
+
+    /* ADD TO WISHLIST */
+    async function addToWishlist() {
+        const userId = localStorage.getItem("user_id");
+
+        if (!userId) {
+            alert("Please login to add products to wishlist.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/wishlist/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: Number(userId),
+                    product_id: product.product_id
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.status === "success") {
+                alert("Product added to wishlist ❤️");
+            } else {
+                alert(result.message || "Failed to add wishlist");
+            }
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong.");
+        }
+    }
+
+    /* ERROR */
+    function showError(message) {
+        document.getElementById("loading").style.display = "none";
+
+        const errorElement = document.getElementById("error");
+        errorElement.style.display = "block";
+
+        errorElement.innerHTML = `
+            <h2>${message}</h2>
+            <br>
+            <a href="products.html">Back to Products</a>
+        `;
+    }
+
+    /* START */
+    loadProduct();
+</script>
 
 
 </body>

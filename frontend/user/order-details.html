@@ -1,21 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details - MediCare Pharmacy</title>
-
-
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -23,15 +13,12 @@
             font-family: Arial, sans-serif;
         }
 
-
         body {
             background: #f5f7fa;
             color: #333;
         }
 
-
         /* HEADER */
-
         header {
             background: white;
             padding: 18px 7%;
@@ -41,19 +28,16 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
-
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: #1976d2;
+            color: #168a63;
         }
-
 
         nav {
             display: flex;
             gap: 20px;
         }
-
 
         nav a {
             text-decoration: none;
@@ -61,20 +45,16 @@
             font-size: 15px;
         }
 
-
         nav a:hover {
-            color: #1976d2;
+            color: #168a63;
         }
 
-
         /* CONTAINER */
-
         .container {
             width: 90%;
             max-width: 1100px;
             margin: 40px auto;
         }
-
 
         .top-section {
             display: flex;
@@ -83,21 +63,18 @@
             margin-bottom: 25px;
         }
 
-
         .top-section h1 {
-            color: #1976d2;
+            color: #168a63;
         }
-
 
         .back-btn {
             padding: 10px 18px;
-            background: #1976d2;
+            background: #168a63;
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
         }
-
 
         .card {
             background: white;
@@ -107,21 +84,17 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
-
         .card h2 {
             margin-bottom: 20px;
-            color: #1976d2;
+            color: #168a63;
         }
 
-
         /* DETAILS */
-
         .details-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
-
 
         .detail-box {
             background: #f8fafc;
@@ -129,73 +102,61 @@
             border-radius: 7px;
         }
 
-
         .detail-box strong {
             display: block;
             margin-bottom: 6px;
             color: #555;
         }
 
-
         /* STATUS */
-
         .status {
             display: inline-block;
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 14px;
+            text-transform: capitalize;
         }
-
 
         .pending {
             background: #fff3cd;
             color: #856404;
         }
 
-
         .confirmed {
             background: #cce5ff;
             color: #004085;
         }
-
 
         .packed {
             background: #e2e3e5;
             color: #383d41;
         }
 
-
         .shipped {
             background: #d1ecf1;
             color: #0c5460;
         }
-
 
         .out-for-delivery {
             background: #d4edda;
             color: #155724;
         }
 
-
         .delivered {
             background: #c3e6cb;
             color: #155724;
         }
-
 
         .cancelled {
             background: #f8d7da;
             color: #721c24;
         }
 
-
         /* TABLE */
-
         .items-table {
             width: 100%;
             border-collapse: collapse;
         }
-
 
         .items-table th,
         .items-table td {
@@ -204,26 +165,20 @@
             text-align: left;
         }
 
-
         .items-table th {
             background: #f5f7fa;
         }
 
-
         /* ADDRESS */
-
         .address {
             line-height: 1.8;
         }
 
-
         /* AMOUNT */
-
         .amount-box {
             max-width: 400px;
             margin-left: auto;
         }
-
 
         .amount-row {
             display: flex;
@@ -231,25 +186,21 @@
             padding: 10px 0;
         }
 
-
         .final-amount {
             border-top: 2px solid #ddd;
             margin-top: 10px;
             padding-top: 15px;
             font-size: 20px;
             font-weight: bold;
-            color: #1976d2;
+            color: #168a63;
         }
 
-
         /* BUTTONS */
-
         .buttons {
             display: flex;
             gap: 12px;
             margin-top: 20px;
         }
-
 
         .btn {
             padding: 11px 20px;
@@ -258,18 +209,16 @@
             cursor: pointer;
             color: white;
             font-size: 14px;
+            font-weight: bold;
         }
-
 
         .reorder-btn {
             background: #43a047;
         }
 
-
         .cancel-btn {
             background: #e53935;
         }
-
 
         .message {
             text-align: center;
@@ -277,31 +226,25 @@
             font-size: 18px;
         }
 
-
         footer {
             margin-top: 50px;
-            background: #1976d2;
+            background: #12352b;
             color: white;
             text-align: center;
             padding: 20px;
         }
 
-
         /* RESPONSIVE */
-
         @media (max-width: 768px) {
-
             header {
                 flex-direction: column;
                 gap: 15px;
             }
 
-
             nav {
                 flex-wrap: wrap;
                 justify-content: center;
             }
-
 
             .top-section {
                 flex-direction: column;
@@ -309,1237 +252,398 @@
                 gap: 15px;
             }
 
-
             .details-grid {
                 grid-template-columns: 1fr;
             }
 
-
             .items-table {
                 font-size: 13px;
             }
-
 
             .items-table th,
             .items-table td {
                 padding: 8px;
             }
 
-
             .buttons {
                 flex-direction: column;
             }
 
-
             .btn {
                 width: 100%;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
     <div class="logo">
         MediCare Pharmacy
     </div>
-
-
     <nav>
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="products.html">
-            Products
-        </a>
-
-        <a href="wishlist.html">
-            Wishlist
-        </a>
-
-        <a href="cart.html">
-            Cart
-        </a>
-
-        <a href="orders.html">
-            Orders
-        </a>
-
-        <a href="profile.html">
-            Profile
-        </a>
-
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="wishlist.html">Wishlist</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+        <a href="profile.html">Profile</a>
     </nav>
-
 </header>
 
-
-
 <div class="container">
-
-
     <div class="top-section">
-
-        <h1>
-            Order Details
-        </h1>
-
-
-        <button
-            class="back-btn"
-            onclick="goBack()"
-        >
-
-            Back
-
-        </button>
-
+        <h1>Order Details</h1>
+        <button class="back-btn" onclick="goBack()">Back</button>
     </div>
 
-
-    <div
-        id="message"
-        class="message"
-    >
+    <div id="message" class="message">
         Loading order details...
     </div>
 
-
-
-    <div
-        id="orderContent"
-        style="display:none;"
-    >
-
-
+    <div id="orderContent" style="display:none;">
         <!-- ORDER INFORMATION -->
-
         <div class="card">
-
-            <h2>
-                Order Information
-            </h2>
-
-
+            <h2>Order Information</h2>
             <div class="details-grid">
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Order ID
-                    </strong>
-
-                    <span id="orderId">
-                    </span>
-
+                    <strong>Order ID</strong>
+                    <span id="orderId"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Order Date
-                    </strong>
-
-                    <span id="orderDate">
-                    </span>
-
+                    <strong>Order Date</strong>
+                    <span id="orderDate"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Order Status
-                    </strong>
-
-                    <span
-                        id="orderStatus"
-                        class="status"
-                    >
-                    </span>
-
+                    <strong>Order Status</strong>
+                    <span id="orderStatus" class="status"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Payment Status
-                    </strong>
-
-                    <span id="paymentStatus">
-                    </span>
-
+                    <strong>Payment Status</strong>
+                    <span id="paymentStatus"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Expected Delivery
-                    </strong>
-
-                    <span id="deliveryDate">
-                    </span>
-
+                    <strong>Expected Delivery</strong>
+                    <span id="deliveryDate"></span>
                 </div>
-
-
             </div>
-
         </div>
-
-
 
         <!-- DELIVERY ADDRESS -->
-
         <div class="card">
-
-            <h2>
-                Delivery Address
-            </h2>
-
-
-            <div
-                id="address"
-                class="address"
-            >
-
+            <h2>Delivery Address</h2>
+            <div id="address" class="address">
                 Address loading...
-
             </div>
-
         </div>
-
-
 
         <!-- ORDER ITEMS -->
-
         <div class="card">
-
-            <h2>
-                Ordered Products
-            </h2>
-
-
-            <div
-                style="overflow-x:auto;"
-            >
-
+            <h2>Ordered Products</h2>
+            <div style="overflow-x:auto;">
                 <table class="items-table">
-
                     <thead>
-
                         <tr>
-
-                            <th>
-                                Product
-                            </th>
-
-                            <th>
-                                Quantity
-                            </th>
-
-                            <th>
-                                Price
-                            </th>
-
-                            <th>
-                                Total
-                            </th>
-
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
                         </tr>
-
                     </thead>
-
-
                     <tbody id="itemsBody">
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
-
-
 
         <!-- PAYMENT -->
-
         <div class="card">
-
-            <h2>
-                Payment Details
-            </h2>
-
-
+            <h2>Payment Details</h2>
             <div class="details-grid">
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Payment Method
-                    </strong>
-
-                    <span id="paymentMethod">
-                    </span>
-
+                    <strong>Payment Method</strong>
+                    <span id="paymentMethod"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Payment Amount
-                    </strong>
-
-                    ₹<span id="paymentAmount">
-                    </span>
-
+                    <strong>Payment Amount</strong>
+                    ₹<span id="paymentAmount"></span>
                 </div>
-
-
                 <div class="detail-box">
-
-                    <strong>
-                        Transaction ID
-                    </strong>
-
-                    <span id="transactionId">
-                    </span>
-
+                    <strong>Transaction ID</strong>
+                    <span id="transactionId"></span>
                 </div>
-
-
             </div>
-
         </div>
-
-
 
         <!-- ORDER SUMMARY -->
-
         <div class="card">
-
-            <h2>
-                Order Summary
-            </h2>
-
-
+            <h2>Order Summary</h2>
             <div class="amount-box">
-
-
                 <div class="amount-row">
-
-                    <span>
-                        Total Amount
-                    </span>
-
-                    <span>
-                        ₹<span id="totalAmount">
-                        </span>
-                    </span>
-
+                    <span>Total Amount</span>
+                    <span>₹<span id="totalAmount"></span></span>
                 </div>
-
-
                 <div class="amount-row">
-
-                    <span>
-                        Discount
-                    </span>
-
-                    <span>
-                        - ₹<span id="discountAmount">
-                        </span>
-                    </span>
-
+                    <span>Discount</span>
+                    <span>- ₹<span id="discountAmount"></span></span>
                 </div>
-
-
                 <div class="amount-row final-amount">
-
-                    <span>
-                        Final Amount
-                    </span>
-
-                    <span>
-                        ₹<span id="finalAmount">
-                        </span>
-                    </span>
-
+                    <span>Final Amount</span>
+                    <span>₹<span id="finalAmount"></span></span>
                 </div>
-
-
             </div>
-
         </div>
-
-
 
         <!-- ACTION BUTTONS -->
-
-        <div
-            id="actionCard"
-            class="card"
-        >
-
+        <div id="actionCard" class="card">
             <div class="buttons">
-
-
-                <button
-                    id="reorderButton"
-                    class="btn reorder-btn"
-                    onclick="reorderOrder()"
-                >
-
+                <button id="reorderButton" class="btn reorder-btn" onclick="reorderOrder()">
                     Reorder
-
                 </button>
-
-
-                <button
-                    id="cancelButton"
-                    class="btn cancel-btn"
-                    onclick="cancelOrder()"
-                >
-
+                <button id="cancelButton" class="btn cancel-btn" onclick="cancelOrder()">
                     Cancel Order
-
                 </button>
-
-
             </div>
-
         </div>
-
-
     </div>
-
 </div>
 
-
-
 <footer>
-
-    <p>
-        © 2026 MediCare Pharmacy. All Rights Reserved.
-    </p>
-
+    <p>© 2026 MediCare Pharmacy. All Rights Reserved.</p>
 </footer>
 
-
-
 <script>
-
-
-    /* =========================
-       API
-    ========================= */
-
     const API_URL = window.location.hostname === "localhost" ? "http://localhost:3000" : "";
 
-
-    /* =========================
-       USER
-    ========================= */
-
-    const userId =
-        localStorage.getItem(
-            "user_id"
-        )
-
-
-    /* =========================
-       ORDER
-    ========================= */
+    const userId = localStorage.getItem("user_id");
 
     const orderId =
         new URLSearchParams(window.location.search).get("order_id") ||
         localStorage.getItem("selectedOrderId") ||
-        localStorage.getItem("selectedAdminOrderId")
+        localStorage.getItem("selectedAdminOrderId");
 
-
-    /* =========================
-       ADMIN VIEW CHECK
-    ========================= */
-
-    const urlParams =
-        new URLSearchParams(
-            window.location.search
-        )
-
-
-    const isAdminView =
-        urlParams.get("from") === "admin"
-
-
-    /* =========================
-       LOGIN CHECK
-    ========================= */
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdminView = urlParams.get("from") === "admin";
 
     if (!orderId) {
-
-        document.getElementById(
-            "message"
-        ).innerText =
-            "Order not found"
-
+        document.getElementById("message").innerText = "Order not found";
+    } else if (!userId && !isAdminView) {
+        window.location.href = "login.html";
+    } else {
+        loadOrderDetails();
     }
-    else if (
-        !userId &&
-        !isAdminView
-    ) {
-
-        window.location.href =
-            "login.html"
-
-    }
-    else {
-
-        loadOrderDetails()
-
-    }
-
-
-    /* =========================
-       LOAD ORDER DETAILS
-    ========================= */
 
     async function loadOrderDetails() {
-
         try {
-
-
-            const orderResponse =
-                await fetch(
-                    `${API_URL}/order/${orderId}`
-                )
-
+            // FIXED: Added /api prefix to match server.js routes
+            const orderResponse = await fetch(`${API_URL}/api/order/${orderId}`);
 
             if (!orderResponse.ok) {
-
-                throw new Error(
-                    `HTTP Error: ${orderResponse.status}`
-                )
-
+                throw new Error(`HTTP Error: ${orderResponse.status}`);
             }
 
+            const orderResult = await orderResponse.json();
 
-            const orderResult =
-                await orderResponse.json()
-
-
-            console.log(
-                "Order response:",
-                orderResult
-            )
-
-
-            if (
-                orderResult.status !== "success" ||
-                !orderResult.data ||
-                !orderResult.data.order
-            ) {
-
-                throw new Error(
-                    orderResult.message ||
-                    "Order details not found"
-                )
-
+            if (orderResult.status !== "success" || !orderResult.data || !orderResult.data.order) {
+                throw new Error(orderResult.message || "Order details not found");
             }
 
+            const order = orderResult.data.order;
+            const items = orderResult.data.items || [];
+            const payment = orderResult.data.payment || null;
 
-            const order =
-                orderResult.data.order
+            document.getElementById("orderContent").style.display = "block";
+            document.getElementById("message").style.display = "none";
 
+            document.getElementById("orderId").innerText = order.order_id || "-";
+            document.getElementById("orderDate").innerText = formatDate(order.createdon);
 
-            const items =
-                orderResult.data.items || []
+            const orderStatus = String(order.order_status || "pending").toLowerCase();
+            document.getElementById("orderStatus").innerText = orderStatus;
+            document.getElementById("orderStatus").className = `status ${orderStatus.replaceAll(" ", "-")}`;
 
+            document.getElementById("paymentStatus").innerText = order.payment_status || "-";
+            document.getElementById("deliveryDate").innerText = formatDate(order.expected_delivery_date);
 
-            const payment =
-                orderResult.data.payment || null
+            document.getElementById("totalAmount").innerText = Number(order.total_amount || 0).toFixed(2);
+            document.getElementById("discountAmount").innerText = Number(order.discount_amount || 0).toFixed(2);
+            document.getElementById("finalAmount").innerText = Number(order.final_amount || 0).toFixed(2);
 
+            document.getElementById("paymentMethod").innerText = order.payment_method || (payment ? payment.payment_method : "-");
+            document.getElementById("paymentAmount").innerText = Number(payment ? payment.amount : order.final_amount || 0).toFixed(2);
+            document.getElementById("transactionId").innerText = payment && payment.transaction_id ? payment.transaction_id : "Not available";
 
-            /* =========================
-               SHOW CONTENT
-            ========================= */
-
-            document.getElementById(
-                "orderContent"
-            ).style.display =
-                "block"
-
-
-            document.getElementById(
-                "message"
-            ).style.display =
-                "none"
-
-
-            /* =========================
-               ORDER INFORMATION
-            ========================= */
-
-            document.getElementById(
-                "orderId"
-            ).innerText =
-                order.order_id || "-"
-
-
-            document.getElementById(
-                "orderDate"
-            ).innerText =
-                formatDate(
-                    order.createdon
-                )
-
-
-            const orderStatus =
-                String(
-                    order.order_status ||
-                    "pending"
-                ).toLowerCase()
-
-
-            document.getElementById(
-                "orderStatus"
-            ).innerText =
-                orderStatus
-
-
-            document.getElementById(
-                "orderStatus"
-            ).className =
-                `status ${orderStatus.replaceAll(" ", "-")}`
-
-
-            document.getElementById(
-                "paymentStatus"
-            ).innerText =
-                order.payment_status ||
-                "-"
-
-
-            document.getElementById(
-                "deliveryDate"
-            ).innerText =
-                formatDate(
-                    order.expected_delivery_date
-                )
-
-
-            /* =========================
-               AMOUNT
-            ========================= */
-
-            document.getElementById(
-                "totalAmount"
-            ).innerText =
-                Number(
-                    order.total_amount || 0
-                ).toFixed(2)
-
-
-            document.getElementById(
-                "discountAmount"
-            ).innerText =
-                Number(
-                    order.discount_amount || 0
-                ).toFixed(2)
-
-
-            document.getElementById(
-                "finalAmount"
-            ).innerText =
-                Number(
-                    order.final_amount || 0
-                ).toFixed(2)
-
-
-            /* =========================
-               PAYMENT
-            ========================= */
-
-            document.getElementById(
-                "paymentMethod"
-            ).innerText =
-                order.payment_method ||
-                (
-                    payment
-                        ? payment.payment_method
-                        : "-"
-                )
-
-
-            document.getElementById(
-                "paymentAmount"
-            ).innerText =
-                Number(
-                    payment
-                        ? payment.amount
-                        : order.final_amount || 0
-                ).toFixed(2)
-
-
-            document.getElementById(
-                "transactionId"
-            ).innerText =
-                payment &&
-                payment.transaction_id
-                    ? payment.transaction_id
-                    : "Not available"
-
-
-            /* =========================
-               ITEMS
-            ========================= */
-
-            displayItems(
-                items
-            )
-
-
-            /* =========================
-               ADDRESS
-            ========================= */
-
-            await loadAddress(
-                order.user_id,
-                order.address_id
-            )
-
-
-            /* =========================
-               ADMIN VIEW
-            ========================= */
+            displayItems(items);
+            await loadAddress(order.user_id, order.address_id);
 
             if (isAdminView) {
-
-                document.getElementById(
-                    "actionCard"
-                ).style.display =
-                    "none"
-
-            }
-            else {
-
-                if (
-                    orderStatus !== "pending"
-                ) {
-
-                    document.getElementById(
-                        "cancelButton"
-                    ).style.display =
-                        "none"
-
+                document.getElementById("actionCard").style.display = "none";
+            } else {
+                if (orderStatus !== "pending") {
+                    document.getElementById("cancelButton").style.display = "none";
                 }
-
             }
-
-
+        } catch (error) {
+            console.log("Order details error:", error);
+            document.getElementById("message").innerText = error.message || "Failed to load order details";
         }
-        catch (error) {
-
-            console.log(
-                "Order details error:",
-                error
-            )
-
-
-            document.getElementById(
-                "message"
-            ).innerText =
-                error.message ||
-                "Failed to load order details"
-
-        }
-
     }
-
-
-    /* =========================
-       DISPLAY ITEMS
-    ========================= */
 
     function displayItems(items) {
+        const itemsBody = document.getElementById("itemsBody");
+        itemsBody.innerHTML = "";
 
-        const itemsBody =
-            document.getElementById(
-                "itemsBody"
-            )
-
-
-        itemsBody.innerHTML = ""
-
-
-        if (
-            !Array.isArray(items) ||
-            items.length === 0
-        ) {
-
+        if (!Array.isArray(items) || items.length === 0) {
             itemsBody.innerHTML = `
-
                 <tr>
-
-                    <td
-                        colspan="4"
-                        style="text-align:center;"
-                    >
-
-                        No products found
-
-                    </td>
-
+                    <td colspan="4" style="text-align:center;">No products found</td>
                 </tr>
-
-            `
-
-            return
-
+            `;
+            return;
         }
-
 
         items.forEach(item => {
-
-            const price =
-                Number(
-                    item.price || 0
-                )
-
-
-            const quantity =
-                Number(
-                    item.quantity || 0
-                )
-
-
-            const total =
-                price * quantity
-
+            const price = Number(item.price || 0);
+            const quantity = Number(item.quantity || 0);
+            const total = price * quantity;
 
             itemsBody.innerHTML += `
-
                 <tr>
-
-                    <td>
-                        ${item.product_name || "-"}
-                    </td>
-
-                    <td>
-                        ${quantity}
-                    </td>
-
-                    <td>
-                        ₹${price.toFixed(2)}
-                    </td>
-
-                    <td>
-                        ₹${total.toFixed(2)}
-                    </td>
-
+                    <td>${item.product_name || "-"}</td>
+                    <td>${quantity}</td>
+                    <td>₹${price.toFixed(2)}</td>
+                    <td>₹${total.toFixed(2)}</td>
                 </tr>
-
-            `
-
-        })
-
+            `;
+        });
     }
 
-
-    /* =========================
-       LOAD ADDRESS
-    ========================= */
-
-    async function loadAddress(
-        orderUserId,
-        addressId
-    ) {
-
-        const addressBox =
-            document.getElementById(
-                "address"
-            )
-
+    async function loadAddress(orderUserId, addressId) {
+        const addressBox = document.getElementById("address");
 
         try {
-
-
-            if (
-                !orderUserId ||
-                !addressId
-            ) {
-
-                addressBox.innerText =
-                    "Address not available"
-
-                return
-
+            if (!orderUserId || !addressId) {
+                addressBox.innerText = "Address not available";
+                return;
             }
 
-
-            const response =
-                await fetch(
-                    `${API_URL}/order/address/${orderUserId}`
-                )
-
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/order/address/${orderUserId}`);
 
             if (!response.ok) {
-
-                throw new Error(
-                    `Address HTTP Error: ${response.status}`
-                )
-
+                throw new Error(`Address HTTP Error: ${response.status}`);
             }
 
-
-            const result =
-                await response.json()
-
-
-            const addresses =
-                result.data || []
-
-
-            const address =
-                addresses.find(
-                    item =>
-                        Number(item.address_id) ===
-                        Number(addressId)
-                )
-
+            const result = await response.json();
+            const addresses = result.data || [];
+            const address = addresses.find(item => Number(item.address_id) === Number(addressId));
 
             if (!address) {
-
-                addressBox.innerText =
-                    "Address not found"
-
-                return
-
+                addressBox.innerText = "Address not found";
+                return;
             }
-
 
             addressBox.innerHTML = `
-
-                <strong>
-                    Phone:
-                </strong>
-
-                ${address.phone || "-"}
-
-                <br>
-
-
-                <strong>
-                    Address:
-                </strong>
-
-                ${address.address || "-"}
-
-                <br>
-
-
-                <strong>
-                    City:
-                </strong>
-
-                ${address.city || "-"}
-
-                <br>
-
-
-                <strong>
-                    State:
-                </strong>
-
-                ${address.state || "-"}
-
-                <br>
-
-
-                <strong>
-                    Pincode:
-                </strong>
-
-                ${address.pincode || "-"}
-
-            `
-
+                <strong>Phone:</strong> ${address.phone || "-"}<br>
+                <strong>Address:</strong> ${address.address || "-"}<br>
+                <strong>City:</strong> ${address.city || "-"}<br>
+                <strong>State:</strong> ${address.state || "-"}<br>
+                <strong>Pincode:</strong> ${address.pincode || "-"}
+            `;
+        } catch (error) {
+            console.log("Address error:", error);
+            addressBox.innerText = "Failed to load address";
         }
-        catch (error) {
-
-            console.log(
-                "Address error:",
-                error
-            )
-
-
-            addressBox.innerText =
-                "Failed to load address"
-
-        }
-
     }
-
-
-    /* =========================
-       REORDER
-    ========================= */
 
     async function reorderOrder() {
-
         if (!userId) {
-
-            alert(
-                "Please login to reorder"
-            )
-
-            return
-
+            alert("Please login to reorder");
+            return;
         }
-
 
         try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/order/reorder`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: Number(userId),
+                    order_id: Number(orderId)
+                })
+            });
 
-            const response =
-                await fetch(
+            const result = await response.json();
 
-                    `${API_URL}/order/reorder`,
-
-                    {
-
-                        method: "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json"
-
-                        },
-
-                        body: JSON.stringify({
-
-                            user_id:
-                                Number(userId),
-
-                            order_id:
-                                Number(orderId)
-
-                        })
-
-                    }
-
-                )
-
-
-            const result =
-                await response.json()
-
-
-            if (
-                result.status ===
-                "success"
-            ) {
-
-                alert(
-                    "Previous order added to cart"
-                )
-
-
-                window.location.href =
-                    "cart.html"
-
+            if (result.status === "success") {
+                alert("Previous order added to cart");
+                window.location.href = "cart.html";
+            } else {
+                alert(result.message || "Reorder failed");
             }
-            else {
-
-                alert(
-                    result.message ||
-                    "Reorder failed"
-                )
-
-            }
-
+        } catch (error) {
+            console.log(error);
+            alert("Reorder failed");
         }
-        catch (error) {
-
-            console.log(
-                error
-            )
-
-
-            alert(
-                "Reorder failed"
-            )
-
-        }
-
     }
-
-
-    /* =========================
-       CANCEL ORDER
-    ========================= */
 
     async function cancelOrder() {
-
         if (!userId) {
-
-            alert(
-                "Please login"
-            )
-
-            return
-
+            alert("Please login");
+            return;
         }
 
-
-        const confirmCancel =
-            confirm(
-                "Are you sure you want to cancel this order?"
-            )
-
-
+        const confirmCancel = confirm("Are you sure you want to cancel this order?");
         if (!confirmCancel) {
-
-            return
-
+            return;
         }
-
 
         try {
+            // FIXED: Added /api prefix to match server.js routes
+            const response = await fetch(`${API_URL}/api/order/cancel/${orderId}`, {
+                method: "PUT"
+            });
 
-            const response =
-                await fetch(
+            const result = await response.json();
 
-                    `${API_URL}/order/cancel/${orderId}`,
-
-                    {
-
-                        method: "PUT"
-
-                    }
-
-                )
-
-
-            const result =
-                await response.json()
-
-
-            if (
-                result.status ===
-                "success"
-            ) {
-
-                alert(
-                    "Order cancelled successfully"
-                )
-
-
-                loadOrderDetails()
-
+            if (result.status === "success") {
+                alert("Order cancelled successfully");
+                loadOrderDetails();
+            } else {
+                alert(result.message || "Order cancellation failed");
             }
-            else {
-
-                alert(
-                    result.message ||
-                    "Order cancellation failed"
-                )
-
-            }
-
+        } catch (error) {
+            console.log(error);
+            alert("Order cancellation failed");
         }
-        catch (error) {
-
-            console.log(
-                error
-            )
-
-
-            alert(
-                "Order cancellation failed"
-            )
-
-        }
-
     }
-
-
-    /* =========================
-       DATE
-    ========================= */
 
     function formatDate(date) {
-
         if (!date) {
-
-            return "Not available"
-
+            return "Not available";
         }
-
-
-        const newDate =
-            new Date(date)
-
-
-        if (
-            isNaN(
-                newDate.getTime()
-            )
-        ) {
-
-            return "Not available"
-
+        const newDate = new Date(date);
+        if (isNaN(newDate.getTime())) {
+            return "Not available";
         }
-
-
-        return newDate.toLocaleDateString(
-            "en-IN",
-            {
-
-                day: "2-digit",
-
-                month: "short",
-
-                year: "numeric"
-
-            }
-        )
-
+        return newDate.toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
     }
 
-
-    /* =========================
-       BACK
-    ========================= */
-
     function goBack() {
-
         if (isAdminView) {
             window.location.href = "../admin/orders.html";
         } else {
             window.location.href = "orders.html";
         }
-
     }
-
 </script>
 
-
 </body>
-
 </html>
-
